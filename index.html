@@ -32,12 +32,13 @@
     /* Hero */
     .hero {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
       position: relative;
       background: linear-gradient(135deg, var(--blush) 0%, var(--cream) 50%, #E8F8F5 100%);
     }
@@ -51,6 +52,7 @@
       height: 600px;
       background: radial-gradient(circle, rgba(78,205,196,0.12) 0%, transparent 70%);
       border-radius: 50%;
+      pointer-events: none;
     }
 
     .hero::after {
@@ -62,18 +64,21 @@
       height: 500px;
       background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 70%);
       border-radius: 50%;
+      pointer-events: none;
     }
 
     .logo-kanji {
-      font-size: 4rem;
+      font-size: clamp(2.5rem, 8vw, 4rem);
       margin-bottom: 0.5rem;
       opacity: 0.15;
       letter-spacing: 1rem;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
       font-weight: 700;
       color: var(--deep);
       margin-bottom: 0.5rem;
@@ -89,7 +94,7 @@
       font-size: clamp(1.1rem, 2.5vw, 1.4rem);
       color: #636e72;
       font-weight: 600;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       font-style: italic;
       position: relative;
       z-index: 1;
@@ -97,11 +102,12 @@
 
     .hero .tagline {
       max-width: 600px;
-      font-size: 1.1rem;
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
       color: #636e72;
       margin-bottom: 2.5rem;
       position: relative;
       z-index: 1;
+      padding: 0 1rem;
     }
 
     .scroll-hint {
@@ -120,14 +126,14 @@
 
     /* Sections */
     section {
-      padding: 5rem 2rem;
+      padding: 4rem 1.5rem;
       max-width: 1000px;
       margin: 0 auto;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
 
     .section-header .icon {
@@ -138,14 +144,14 @@
 
     .section-header h2 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
       color: var(--deep);
       margin-bottom: 0.5rem;
     }
 
     .section-header p {
       color: #636e72;
-      font-size: 1.05rem;
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
       max-width: 600px;
       margin: 0 auto;
     }
@@ -153,7 +159,7 @@
     /* Concept cards */
     .concept-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
@@ -161,7 +167,7 @@
     .concept-card {
       background: white;
       border-radius: 20px;
-      padding: 2rem;
+      padding: 1.75rem;
       box-shadow: var(--soft-shadow);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-top: 4px solid var(--mint);
@@ -178,38 +184,40 @@
 
     .concept-card .card-icon {
       font-size: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .concept-card h3 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 800;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       color: var(--deep);
     }
 
     .concept-card p, .concept-card ul {
       color: #636e72;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }
 
     .concept-card ul {
       list-style: none;
       padding: 0;
+      margin-top: 0.5rem;
     }
 
     .concept-card ul li {
-      padding: 0.3rem 0;
+      padding: 0.25rem 0;
       padding-left: 1.2rem;
       position: relative;
     }
 
     .concept-card ul li::before {
-      content: '>';
+      content: '›';
       position: absolute;
       left: 0;
       color: var(--mint);
       font-weight: 700;
+      font-size: 1.2rem;
     }
 
     .concept-card:nth-child(2) ul li::before { color: var(--coral); }
@@ -220,20 +228,21 @@
     .themes-cloud {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.6rem;
       justify-content: center;
       margin-top: 2rem;
     }
 
     .theme-tag {
       background: white;
-      padding: 0.5rem 1.2rem;
+      padding: 0.45rem 1rem;
       border-radius: 50px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
       box-shadow: var(--soft-shadow);
       transition: transform 0.2s ease;
       cursor: default;
+      white-space: nowrap;
     }
 
     .theme-tag:hover { transform: scale(1.08); }
@@ -246,14 +255,14 @@
     .parents-section {
       background: linear-gradient(135deg, #FFF0F0, #FFF8E7);
       border-radius: 24px;
-      padding: 3rem 2rem;
+      padding: 3rem 1.5rem;
       margin: 2rem auto;
       max-width: 1000px;
     }
 
     .parents-examples {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
       gap: 1rem;
       margin-top: 2rem;
     }
@@ -261,9 +270,9 @@
     .parent-item {
       background: white;
       border-radius: 16px;
-      padding: 1.25rem 1.5rem;
+      padding: 1rem 1.25rem;
       box-shadow: var(--soft-shadow);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--deep);
       display: flex;
       align-items: flex-start;
@@ -274,14 +283,16 @@
     .parent-item:hover { transform: translateX(4px); }
 
     .parent-item .emoji {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       flex-shrink: 0;
+      line-height: 1.5;
     }
 
     /* Strategy section */
     .strategy-timeline {
       position: relative;
       margin-top: 2rem;
+      padding-left: 0;
     }
 
     .strategy-timeline::before {
@@ -297,14 +308,15 @@
 
     .strategy-step {
       display: flex;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
       position: relative;
     }
 
     .step-dot {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
       border-radius: 50%;
       background: white;
       border: 3px solid var(--mint);
@@ -325,34 +337,35 @@
     .step-content {
       background: white;
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1.25rem;
       box-shadow: var(--soft-shadow);
       flex: 1;
+      min-width: 0;
     }
 
     .step-content h3 {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .step-content p {
       color: #636e72;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }
 
     /* Platforms */
     .platforms {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+      gap: 1.25rem;
       margin-top: 2rem;
     }
 
     .platform-card {
       background: white;
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1.5rem 1rem;
       text-align: center;
       box-shadow: var(--soft-shadow);
       transition: transform 0.3s ease;
@@ -360,22 +373,22 @@
 
     .platform-card:hover { transform: translateY(-4px); }
 
-    .platform-card .p-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-    .platform-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .platform-card p { color: #636e72; font-size: 0.9rem; }
+    .platform-card .p-icon { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .platform-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .platform-card p { color: #636e72; font-size: 0.88rem; }
 
     /* Resources */
     .resources-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+      gap: 1.25rem;
       margin-top: 2rem;
     }
 
     .resource-card {
       background: white;
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1.5rem 1rem;
       box-shadow: var(--soft-shadow);
       text-align: center;
       border-bottom: 4px solid var(--mint);
@@ -384,27 +397,27 @@
     .resource-card:nth-child(2) { border-bottom-color: var(--coral); }
     .resource-card:nth-child(3) { border-bottom-color: var(--lavender); }
 
-    .resource-card .r-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-    .resource-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .resource-card p { color: #636e72; font-size: 0.9rem; }
+    .resource-card .r-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .resource-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .resource-card p { color: #636e72; font-size: 0.88rem; }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 3rem 1.5rem;
       background: var(--deep);
       color: white;
     }
 
     footer h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 4vw, 2rem);
       margin-bottom: 0.5rem;
     }
 
     footer p {
       color: rgba(255,255,255,0.6);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }
 
     /* Animations on scroll */
@@ -419,10 +432,44 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 600px) {
-      section { padding: 3rem 1.25rem; }
-      .parents-section { padding: 2rem 1.25rem; }
-      .strategy-timeline::before { left: 20px; }
+    /* Mobile-specific adjustments */
+    @media (max-width: 480px) {
+      .hero { padding: 2rem 1rem; }
+      section { padding: 3rem 1rem; }
+      .parents-section {
+        padding: 2rem 1rem;
+        border-radius: 16px;
+        margin: 1rem 0.5rem;
+      }
+      .concept-card { padding: 1.5rem; }
+      .strategy-timeline::before { left: 22px; }
+      .step-dot { width: 44px; height: 44px; min-width: 44px; font-size: 1rem; }
+      .strategy-step { gap: 1rem; }
+      .step-content { padding: 1rem; }
+      .parent-item { padding: 0.85rem 1rem; font-size: 0.88rem; }
+      .theme-tag { padding: 0.4rem 0.8rem; font-size: 0.82rem; }
+      .themes-cloud { gap: 0.5rem; }
+    }
+
+    @media (max-width: 360px) {
+      .hero h1 { font-size: 1.8rem; }
+      .logo-kanji { font-size: 2rem; letter-spacing: 0.5rem; }
+      .concept-grid { gap: 1rem; }
+      .parents-examples { gap: 0.75rem; }
+    }
+
+    /* Tablet */
+    @media (min-width: 481px) and (max-width: 768px) {
+      section { padding: 3.5rem 1.5rem; }
+      .parents-section { margin: 2rem 1rem; }
+    }
+
+    /* Hover only on devices that support it */
+    @media (hover: none) {
+      .concept-card:hover,
+      .platform-card:hover { transform: none; }
+      .parent-item:hover { transform: none; }
+      .theme-tag:hover { transform: none; }
     }
   </style>
 </head>
@@ -432,10 +479,10 @@
   <div class="hero">
     <div class="logo-kanji">昔々</div>
     <h1><span>Mukashi</span> Mukashi</h1>
-    <p class="subtitle">Il etait une fois...</p>
+    <p class="subtitle">Il était une fois...</p>
     <p class="tagline">
-      Un univers mensuel autour de la lecture, de la creativite et de la parentalite.
-      Chaque mois, un theme. Chaque theme, mille histoires a partager en famille.
+      Un univers mensuel autour de la lecture, de la créativité et de la parentalité.
+      Chaque mois, un thème. Chaque thème, mille histoires à partager en famille.
     </p>
     <div class="scroll-hint">&#8595;</div>
   </div>
@@ -445,17 +492,17 @@
     <div class="section-header fade-in">
       <span class="icon">&#9733;</span>
       <h2>Le Concept</h2>
-      <p>Un ecosysteme de contenus autour de l'enfance, structure en quatre univers complementaires.</p>
+      <p>Un écosystème de contenus autour de l'enfance, structuré en quatre univers complémentaires.</p>
     </div>
     <div class="concept-grid">
       <div class="concept-card fade-in">
         <div class="card-icon">&#128218;</div>
         <h3>Les Livres</h3>
-        <p>Recommandations bibliographiques mensuelles en lien avec le theme.</p>
+        <p>Recommandations bibliographiques mensuelles en lien avec le thème.</p>
         <ul>
-          <li>Carrousel Instagram avec mises en scene</li>
-          <li>Videos de presentation</li>
-          <li>Blog avec bibliographies completes</li>
+          <li>Carrousel Instagram avec mises en scène</li>
+          <li>Vidéos de présentation</li>
+          <li>Blog avec bibliographies complètes</li>
         </ul>
       </div>
       <div class="concept-card fade-in">
@@ -463,19 +510,19 @@
         <h3>Le Podcast</h3>
         <p>Un format audio intime et engageant.</p>
         <ul>
-          <li>Q&R avec les enfants de la communaute</li>
-          <li>Histoire inedite racontee</li>
-          <li>Meditation parent/enfant</li>
+          <li>Q&amp;R avec les enfants de la communauté</li>
+          <li>Histoire inédite racontée</li>
+          <li>Méditation parent/enfant</li>
         </ul>
       </div>
       <div class="concept-card fade-in">
         <div class="card-icon">&#9999;&#65039;</div>
-        <h3>Les Activites</h3>
-        <p>Une activite creative par mois en lien avec le theme.</p>
+        <h3>Les Activités</h3>
+        <p>Une activité créative par mois en lien avec le thème.</p>
         <ul>
           <li>Carrousel Instagram avec photos</li>
-          <li>Deroule complet sur le blog</li>
-          <li>Supports a imprimer</li>
+          <li>Déroulé complet sur le blog</li>
+          <li>Supports à imprimer</li>
         </ul>
       </div>
       <div class="concept-card fade-in">
@@ -484,7 +531,7 @@
         <p>Le format viral : illustrations humoristiques sur les contradictions des parents.</p>
         <ul>
           <li>Illustrations originales</li>
-          <li>Ton decale et bienveillant</li>
+          <li>Ton décalé et bienveillant</li>
           <li>Fort potentiel de partage</li>
         </ul>
       </div>
@@ -495,20 +542,20 @@
   <section>
     <div class="section-header fade-in">
       <span class="icon">&#127912;</span>
-      <h2>Les Themes</h2>
-      <p>Chaque mois, un nouveau theme ouvre un monde d'histoires, d'activites et de decouvertes.</p>
+      <h2>Les Thèmes</h2>
+      <p>Chaque mois, un nouveau thème ouvre un monde d'histoires, d'activités et de découvertes.</p>
     </div>
     <div class="themes-cloud fade-in">
       <span class="theme-tag">Les couleurs</span>
       <span class="theme-tag">La confiance en soi</span>
       <span class="theme-tag">L'eau</span>
-      <span class="theme-tag">Le pole Nord</span>
+      <span class="theme-tag">Le pôle Nord</span>
       <span class="theme-tag">La magie</span>
       <span class="theme-tag">Les amis</span>
-      <span class="theme-tag">La rentree</span>
-      <span class="theme-tag">Le reve</span>
+      <span class="theme-tag">La rentrée</span>
+      <span class="theme-tag">Le rêve</span>
       <span class="theme-tag">La vieillesse</span>
-      <span class="theme-tag">Les emotions</span>
+      <span class="theme-tag">Les émotions</span>
       <span class="theme-tag">La nature</span>
       <span class="theme-tag">Les voyages</span>
       <span class="theme-tag">La musique</span>
@@ -520,8 +567,8 @@
   <div class="parents-section">
     <div class="section-header fade-in">
       <span class="icon">&#128517;</span>
-      <h2>Il etait une fois... les Parents !</h2>
-      <p>Pourquoi les parents disent une chose et font le contraire ? Des illustrations droles et tendres.</p>
+      <h2>Il était une fois... les Parents !</h2>
+      <p>Pourquoi les parents disent une chose et font le contraire ? Des illustrations drôles et tendres.</p>
     </div>
     <div class="parents-examples">
       <div class="parent-item fade-in">
@@ -530,7 +577,7 @@
       </div>
       <div class="parent-item fade-in">
         <span class="emoji">&#127829;</span>
-        <span>Pourquoi tes parents te disent de manger des legumes <strong>alors qu'eux aussi preferent les pizzas</strong> ?</span>
+        <span>Pourquoi tes parents te disent de manger des légumes <strong>alors qu'eux aussi préfèrent les pizzas</strong> ?</span>
       </div>
       <div class="parent-item fade-in">
         <span class="emoji">&#129463;</span>
@@ -542,15 +589,15 @@
       </div>
       <div class="parent-item fade-in">
         <span class="emoji">&#127769;</span>
-        <span>Pourquoi tes parents veulent que tu te couches tot <strong>alors qu'eux vont au lit ultra-tard</strong> ?</span>
+        <span>Pourquoi tes parents veulent que tu te couches tôt <strong>alors qu'eux vont au lit ultra-tard</strong> ?</span>
       </div>
       <div class="parent-item fade-in">
         <span class="emoji">&#128168;</span>
-        <span>Pourquoi on te dit que ca ne se fait pas de peter en public <strong>alors qu'a la maison tu entends souvent les prouts de maman</strong> ?</span>
+        <span>Pourquoi on te dit que ça ne se fait pas de péter en public <strong>alors qu'à la maison tu entends souvent les prouts de maman</strong> ?</span>
       </div>
       <div class="parent-item fade-in">
         <span class="emoji">&#128241;</span>
-        <span>Pourquoi tes parents t'interdisent les ecrans <strong>alors qu'eux le font tout le temps</strong> ?</span>
+        <span>Pourquoi tes parents t'interdisent les écrans <strong>alors qu'eux le font tout le temps</strong> ?</span>
       </div>
       <div class="parent-item fade-in">
         <span class="emoji">&#129317;</span>
@@ -562,7 +609,7 @@
       </div>
       <div class="parent-item fade-in">
         <span class="emoji">&#128227;</span>
-        <span>Pourquoi tes parents crient parfois <strong>alors qu'ils te disent qu'il y a un autre moyen d'exprimer ta colere</strong> ?</span>
+        <span>Pourquoi tes parents crient parfois <strong>alors qu'ils te disent qu'il y a « un autre moyen d'exprimer ta colère »</strong> ?</span>
       </div>
     </div>
   </div>
@@ -571,29 +618,29 @@
   <section>
     <div class="section-header fade-in">
       <span class="icon">&#128640;</span>
-      <h2>Strategie de Lancement</h2>
-      <p>Une montee en puissance progressive pour installer le projet durablement.</p>
+      <h2>Stratégie de Lancement</h2>
+      <p>Une montée en puissance progressive pour installer le projet durablement.</p>
     </div>
     <div class="strategy-timeline">
       <div class="strategy-step fade-in">
         <div class="step-dot">1</div>
         <div class="step-content">
           <h3>Phase 1 : Ancrage</h3>
-          <p>Lancer Instagram avec deux piliers : les recommandations livres (carrousels mensuels) et la serie "Les Parents" (illustrations humoristiques). Creer le blog avec les bibliographies et les 2 ebooks gratuits.</p>
+          <p>Lancer Instagram avec deux piliers : les recommandations livres (carrousels mensuels) et la série « Les Parents » (illustrations humoristiques). Créer le blog avec les bibliographies et les 2 ebooks gratuits.</p>
         </div>
       </div>
       <div class="strategy-step fade-in">
         <div class="step-dot">2</div>
         <div class="step-content">
           <h3>Phase 2 : Expansion</h3>
-          <p>Ajouter les activites mensuelles et la newsletter. Lancer les histoires participatives avec l'ecole. Deployer la cartographie des librairies lyonnaises.</p>
+          <p>Ajouter les activités mensuelles et la newsletter. Lancer les histoires participatives avec l'école. Déployer la cartographie des librairies lyonnaises.</p>
         </div>
       </div>
       <div class="strategy-step fade-in">
         <div class="step-dot">3</div>
         <div class="step-content">
           <h3>Phase 3 : Enrichissement</h3>
-          <p>Lancer le podcast : Q&R, histoires inedites, meditations. Faire participer les enfants de la communaute. Developper les partenariats avec les librairies.</p>
+          <p>Lancer le podcast : Q&amp;R, histoires inédites, méditations. Faire participer les enfants de la communauté. Développer les partenariats avec les librairies.</p>
         </div>
       </div>
     </div>
@@ -604,28 +651,28 @@
     <div class="section-header fade-in">
       <span class="icon">&#128225;</span>
       <h2>Plateformes</h2>
-      <p>Un ecosysteme multi-canal ou chaque plateforme a son role.</p>
+      <p>Un écosystème multi-canal où chaque plateforme a son rôle.</p>
     </div>
     <div class="platforms">
       <div class="platform-card fade-in">
         <div class="p-icon">&#128247;</div>
         <h3>Instagram</h3>
-        <p>Carrousels, stories, reels. Le point d'entree et le moteur de decouverte.</p>
+        <p>Carrousels, stories, reels. Le point d'entrée et le moteur de découverte.</p>
       </div>
       <div class="platform-card fade-in">
         <div class="p-icon">&#128187;</div>
         <h3>Blog</h3>
-        <p>Bibliographies completes, activites detaillees, ebooks et cartographie a telecharger.</p>
+        <p>Bibliographies complètes, activités détaillées, ebooks et cartographie à télécharger.</p>
       </div>
       <div class="platform-card fade-in">
         <div class="p-icon">&#127911;</div>
         <h3>Podcast</h3>
-        <p>Histoires, meditations et echanges avec les enfants. Le format immersif.</p>
+        <p>Histoires, méditations et échanges avec les enfants. Le format immersif.</p>
       </div>
       <div class="platform-card fade-in">
         <div class="p-icon">&#9993;&#65039;</div>
         <h3>Newsletter</h3>
-        <p>Resume mensuel, theme du mois, nouvelles trouvailles et liens exclusifs.</p>
+        <p>Résumé mensuel, thème du mois, nouvelles trouvailles et liens exclusifs.</p>
       </div>
     </div>
   </section>
@@ -635,23 +682,23 @@
     <div class="section-header fade-in">
       <span class="icon">&#127873;</span>
       <h2>Ressources Gratuites</h2>
-      <p>Des outils concrets a telecharger pour les familles.</p>
+      <p>Des outils concrets à télécharger pour les familles.</p>
     </div>
     <div class="resources-grid">
       <div class="resource-card fade-in">
         <div class="r-icon">&#128118;</div>
-        <h3>Ma premiere bibliotheque</h3>
-        <p>Ebook gratuit — Selection pour les 0-3 ans</p>
+        <h3>Ma première bibliothèque</h3>
+        <p>Ebook gratuit — Sélection pour les 0-3 ans</p>
       </div>
       <div class="resource-card fade-in">
         <div class="r-icon">&#128214;</div>
-        <h3>Bibliotheque de grand</h3>
-        <p>Ebook gratuit — Selection pour les 4-7 ans</p>
+        <h3>Bibliothèque de grand</h3>
+        <p>Ebook gratuit — Sélection pour les 4-7 ans</p>
       </div>
       <div class="resource-card fade-in">
         <div class="r-icon">&#128205;</div>
         <h3>Carte des librairies</h3>
-        <p>Cartographie des librairies independantes pour enfants a Lyon</p>
+        <p>Cartographie des librairies indépendantes pour enfants à Lyon</p>
       </div>
     </div>
   </section>
@@ -661,15 +708,15 @@
     <div class="section-header fade-in">
       <span class="icon">&#128161;</span>
       <h2>Inspirations</h2>
-      <p>Les references qui nourrissent le projet.</p>
+      <p>Les références qui nourrissent le projet.</p>
     </div>
     <div class="themes-cloud fade-in">
       <span class="theme-tag">Muller</span>
-      <span class="theme-tag">Helene Tosco</span>
+      <span class="theme-tag">Hélène Tosco</span>
       <span class="theme-tag">Le livre qui t'explique tout sur les parents</span>
       <span class="theme-tag">Vulgaire (podcast)</span>
-      <span class="theme-tag">Nadege</span>
-      <span class="theme-tag">Morphee</span>
+      <span class="theme-tag">Nadège</span>
+      <span class="theme-tag">Morphée</span>
       <span class="theme-tag">Little Bunbao</span>
     </div>
   </section>
@@ -677,18 +724,17 @@
   <!-- Footer -->
   <footer>
     <h2>Mukashi Mukashi</h2>
-    <p>Il etait une fois... et ce n'est que le debut.</p>
+    <p>Il était une fois... et ce n'est que le début.</p>
   </footer>
 
   <script>
-    // Intersection Observer for fade-in animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
