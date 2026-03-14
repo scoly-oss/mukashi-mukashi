@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliothèque de Grand — Sélection 4-7 ans | Mukashi Mukashi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --mint: #4ECDC4;
+            --sunshine: #FFE66D;
+            --lavender: #A78BFA;
+            --blush: #FFF0F0;
+            --deep: #2D3436;
+            --cream: #FFFDF7;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--cream);
+            color: var(--deep);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+            color: var(--lavender);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: var(--coral);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--blush) 0%, #fce4ec 30%, #e8f5e9 60%, #e3f2fd 100%);
+            padding: 3rem 1.5rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,230,109,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(78,205,196,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--coral), var(--lavender));
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 800;
+            color: var(--deep);
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .hero .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 600;
+            font-style: italic;
+            color: var(--coral);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .intro {
+            max-width: 680px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            margin: 3rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--sunshine);
+        }
+
+        .section-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 700;
+            color: var(--deep);
+        }
+
+        .section-header-classics .section-header { border-bottom-color: var(--coral); }
+        .section-header-emotions .section-header { border-bottom-color: var(--lavender); }
+        .section-header-adventure .section-header { border-bottom-color: var(--mint); }
+        .section-header-nature .section-header { border-bottom-color: #81C784; }
+        .section-header-humor .section-header { border-bottom-color: var(--sunshine); }
+        .section-header-reading .section-header { border-bottom-color: #FF8A65; }
+
+        .book-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .book-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .card-classics::before { background: linear-gradient(to bottom, var(--coral), #ff8e8e); }
+        .card-emotions::before { background: linear-gradient(to bottom, var(--lavender), #c4b5fd); }
+        .card-adventure::before { background: linear-gradient(to bottom, var(--mint), #6ee7de); }
+        .card-nature::before { background: linear-gradient(to bottom, #81C784, #a5d6a7); }
+        .card-humor::before { background: linear-gradient(to bottom, var(--sunshine), #fff59d); }
+        .card-reading::before { background: linear-gradient(to bottom, #FF8A65, #ffab91); }
+
+        .book-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .book-emoji {
+            font-size: 2.2rem;
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--blush);
+            border-radius: 12px;
+        }
+
+        .book-info {
+            flex: 1;
+        }
+
+        .book-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--deep);
+            line-height: 1.3;
+        }
+
+        .book-author {
+            font-size: 0.9rem;
+            color: #888;
+            font-weight: 600;
+            margin-top: 0.15rem;
+        }
+
+        .book-review {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        .book-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .tag-age {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            color: #e65100;
+        }
+
+        .tag-level {
+            background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+            color: #283593;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, var(--blush) 0%, #f3e5f5 50%, #e8f5e9 100%);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .tips-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 700;
+            color: var(--deep);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tip-card {
+            background: white;
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .tip-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--coral), var(--lavender));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .tip-text {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.7;
+        }
+        .tip-text strong {
+            color: var(--deep);
+        }
+
+        footer {
+            background: var(--deep);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--mint);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        footer a:hover {
+            color: var(--sunshine);
+        }
+        footer .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 2rem 1rem 2.5rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            .book-card {
+                padding: 1.2rem;
+            }
+            .tips-section {
+                padding: 1.5rem 1.2rem;
+                border-radius: 14px;
+            }
+            .tip-card {
+                padding: 1rem;
+            }
+            .book-emoji {
+                width: 42px;
+                height: 42px;
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">&larr; Retour &agrave; Mukashi Mukashi</a>
+
+    <header class="hero">
+        <div class="hero-badge">Ebook gratuit</div>
+        <h1>Biblioth&egrave;que de Grand</h1>
+        <p class="subtitle">Les incontournables pour les 4-7 ans</p>
+        <p class="intro">
+            Il y a un &acirc;ge magique o&ugrave; les histoires changent de nature. Les enfants ne se contentent plus d'&eacute;couter : ils commencent &agrave; lire seuls, &agrave; tourner les pages avec fiert&eacute;, &agrave; vivre les aventures de l'int&eacute;rieur. Entre 4 et 7 ans, les livres deviennent des mondes. Des refuges. Des portes vers l'imaginaire et vers soi-m&ecirc;me. Voici notre s&eacute;lection — test&eacute;e, ador&eacute;e, corn&eacute;e &agrave; force d'&ecirc;tre relue.
+        </p>
+    </header>
+
+    <main class="container">
+
+        <!-- SECTION 1: LES GRANDS CLASSIQUES -->
+        <div class="section section-header-classics">
+            <div class="section-header">
+                <span class="section-icon">&#127775;</span>
+                <h2>Les grands classiques</h2>
+            </div>
+
+            <div class="book-card card-classics">
+                <div class="book-top">
+                    <div class="book-emoji">&#127774;</div>
+                    <div class="book-info">
+                        <div class="book-title">Le Petit Prince</div>
+                        <div class="book-author">Antoine de Saint-Exup&eacute;ry</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    &laquo;&nbsp;L'essentiel est invisible pour les yeux.&nbsp;&raquo; Ce livre n'est pas seulement pour les enfants — c'est le premier livre philosophique qu'on peut leur offrir. &Agrave; cet &acirc;ge, ils comprennent l'amiti&eacute; avec le renard, l'absurdit&eacute; des grandes personnes, la beaut&eacute; d'une rose. Lisez-le ensemble, chapitre par chapitre, comme un rituel du soir. Ils y reviendront toute leur vie.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 5 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+
+            <div class="book-card card-classics">
+                <div class="book-top">
+                    <div class="book-emoji">&#128058;</div>
+                    <div class="book-info">
+                        <div class="book-title">Max et les Maximonstres</div>
+                        <div class="book-author">Maurice Sendak</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Max enfile son costume de loup, fait des b&ecirc;tises, et se retrouve roi des monstres sauvages. Ce chef-d'&oelig;uvre montre aux enfants que la col&egrave;re, la sauvagerie int&eacute;rieure, c'est normal — et qu'on peut toujours rentrer &agrave; la maison o&ugrave; le d&icirc;ner nous attend encore chaud. Un classique absolu qui parle &agrave; tout ce qui gronde en eux.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+
+            <div class="book-card card-classics">
+                <div class="book-top">
+                    <div class="book-emoji">&#128024;</div>
+                    <div class="book-info">
+                        <div class="book-title">Elmer</div>
+                        <div class="book-author">David McKee</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Elmer est un &eacute;l&eacute;phant multicolore dans un monde d'&eacute;l&eacute;phants gris. Il essaie d'&ecirc;tre comme les autres, puis d&eacute;couvre que sa diff&eacute;rence est un super-pouvoir. Simple, lumineux, profond. Les enfants de 4-5 ans adorent les couleurs ; ceux de 6-7 ans comprennent le message. Un livre qui grandit avec eux.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lecture accompagn&eacute;e</span>
+                </div>
+            </div>
+
+            <div class="book-card card-classics">
+                <div class="book-top">
+                    <div class="book-emoji">&#129419;</div>
+                    <div class="book-info">
+                        <div class="book-title">La chenille qui fait des trous</div>
+                        <div class="book-author">Eric Carle</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Une petite chenille affam&eacute;e mange, mange, mange — puis se transforme en papillon. Les trous dans les pages, les couleurs vibrantes, la r&eacute;p&eacute;tition rassurante des jours de la semaine : tout est pens&eacute; pour les petites mains et les jeunes esprits. C'est un livre sur la patience, la m&eacute;tamorphose, et la promesse que grandir est beau.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lecture accompagn&eacute;e</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: LES ÉMOTIONS ET GRANDIR -->
+        <div class="section section-header-emotions">
+            <div class="section-header">
+                <span class="section-icon">&#128156;</span>
+                <h2>Les &eacute;motions et grandir</h2>
+            </div>
+
+            <div class="book-card card-emotions">
+                <div class="book-top">
+                    <div class="book-emoji">&#128028;</div>
+                    <div class="book-info">
+                        <div class="book-title">Le loup qui apprivoisait ses &eacute;motions</div>
+                        <div class="book-author">Orianne Lallemand</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Loup est joyeux, puis triste, puis furieux, puis terrifi&eacute; — le tout en une journ&eacute;e. &Ccedil;a vous rappelle quelqu'un&nbsp;? Ce livre donne un nom &agrave; chaque &eacute;motion et montre qu'on peut apprendre &agrave; les apprivoiser sans les &eacute;touffer. Les enfants adorent Loup, et c'est un formidable outil pour ouvrir la conversation sur ce qu'ils ressentent.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+
+            <div class="book-card card-emotions">
+                <div class="book-top">
+                    <div class="book-emoji">&#129412;</div>
+                    <div class="book-info">
+                        <div class="book-title">Les &eacute;motions de Gaston</div>
+                        <div class="book-author">Aur&eacute;lie Chien Chow Chung</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Gaston est une licorne dont la crini&egrave;re change de couleur selon ses &eacute;motions. Chaque livre propose un exercice de respiration concret pour retrouver le calme. C'est de la sophrologie d&eacute;guis&eacute;e en album jeunesse — et &ccedil;a marche. Les enfants redemandent les exercices au moment du coucher. Un outil pr&eacute;cieux pour toute la famille.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lecture accompagn&eacute;e</span>
+                </div>
+            </div>
+
+            <div class="book-card card-emotions">
+                <div class="book-top">
+                    <div class="book-emoji">&#9878;&#65039;</div>
+                    <div class="book-info">
+                        <div class="book-title">Moi, j'ai le droit mais je dois</div>
+                        <div class="book-author">&Eacute;lisabeth Brami</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    &laquo;&nbsp;J'ai le droit de pleurer, mais je dois aussi consoler.&nbsp;&raquo; Ce livre pose avec douceur les bases du vivre-ensemble : chaque droit s'accompagne d'un devoir, chaque libert&eacute; d'une responsabilit&eacute;. Pas de le&ccedil;on de morale — juste des phrases justes qui aident les enfants &agrave; comprendre le monde social. Id&eacute;al pour l'entr&eacute;e au CP.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 5 ans</span>
+                    <span class="tag tag-level">Lecture accompagn&eacute;e</span>
+                </div>
+            </div>
+
+            <div class="book-card card-emotions">
+                <div class="book-top">
+                    <div class="book-emoji">&#128123;</div>
+                    <div class="book-info">
+                        <div class="book-title">Le grand livre des peurs</div>
+                        <div class="book-author">Emily Gravett</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Un catalogue hilarant de toutes les peurs possibles et imaginables — des araign&eacute;es aux &eacute;pouvantails en passant par les choses pointues. Le g&eacute;nie du livre, c'est qu'il d&eacute;dramatise la peur en la rendant dr&ocirc;le. Les enfants rient de leurs propres frayeurs, et c'est d&eacute;j&agrave; les apprivoiser. Un album malin et beau graphiquement.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: L'AVENTURE ET L'IMAGINAIRE -->
+        <div class="section section-header-adventure">
+            <div class="section-header">
+                <span class="section-icon">&#127756;</span>
+                <h2>L'aventure et l'imaginaire</h2>
+            </div>
+
+            <div class="book-card card-adventure">
+                <div class="book-top">
+                    <div class="book-emoji">&#128009;</div>
+                    <div class="book-info">
+                        <div class="book-title">Les Royaumes de Feu</div>
+                        <div class="book-author">Tui T. Sutherland</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Des dragons, des proph&eacute;ties, des alliances entre clans — c'est &eacute;pique, haletant, et incroyablement addictif. Pour les 6-7 ans qui d&eacute;vorent d&eacute;j&agrave; tout, c'est la porte d'entr&eacute;e vers les grands r&eacute;cits d'aventure. Les chapitres sont courts, le rythme est soutenu, et les personnages sont attachants. Attention : ils voudront TOUS les tomes.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 6 ans</span>
+                    <span class="tag tag-level">Lecture autonome</span>
+                </div>
+            </div>
+
+            <div class="book-card card-adventure">
+                <div class="book-top">
+                    <div class="book-emoji">&#129497;</div>
+                    <div class="book-info">
+                        <div class="book-title">Cornebidouille</div>
+                        <div class="book-author">Pierre Bertrand &amp; Magali Bonniol</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Pierre ne veut pas manger sa soupe. La sorci&egrave;re Cornebidouille vient le menacer dans ses r&ecirc;ves. Mais Pierre est plus malin qu'elle. C'est dr&ocirc;le, insolent, jubilatoire — les enfants hurlent de rire &agrave; chaque lecture. Et derri&egrave;re l'humour, il y a un message puissant : on peut tenir t&ecirc;te aux monstres, m&ecirc;me quand on est petit.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+
+            <div class="book-card card-adventure">
+                <div class="book-top">
+                    <div class="book-emoji">&#128653;</div>
+                    <div class="book-info">
+                        <div class="book-title">Le bus de Rosa</div>
+                        <div class="book-author">Fabrizio Silei</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Un grand-p&egrave;re emm&egrave;ne son petit-fils voir le v&eacute;ritable bus de Rosa Parks dans un mus&eacute;e. L'histoire de la s&eacute;gr&eacute;gation est racont&eacute;e avec une tendresse et une gravit&eacute; parfaites pour les jeunes lecteurs. Les illustrations sont somptueuses. C'est un livre qui ouvre la porte &agrave; des conversations essentielles sur la justice et le courage.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 5 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+
+            <div class="book-card card-adventure">
+                <div class="book-top">
+                    <div class="book-emoji">&#128031;</div>
+                    <div class="book-info">
+                        <div class="book-title">L'enfant, la taupe, le renard et le cheval</div>
+                        <div class="book-author">Charlie Mackesy</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    &laquo;&nbsp;Quelle est la chose la plus courageuse que tu aies jamais dite&nbsp;? — Aide-moi.&nbsp;&raquo; Ce livre est un tr&eacute;sor de sagesse dessin&eacute; &agrave; l'encre. Chaque page est une respiration, un murmure bienveillant. Les enfants y trouvent de la douceur ; les adultes qui lisent &agrave; voix haute y trouvent parfois des larmes. Un compagnon pour toute la vie.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 5 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: LA NATURE ET LA SCIENCE -->
+        <div class="section section-header-nature">
+            <div class="section-header">
+                <span class="section-icon">&#127793;</span>
+                <h2>La nature et la science</h2>
+            </div>
+
+            <div class="book-card card-nature">
+                <div class="book-top">
+                    <div class="book-emoji">&#127795;</div>
+                    <div class="book-info">
+                        <div class="book-title">Inventaire illustr&eacute; des arbres</div>
+                        <div class="book-author">Virginie Aladjidi</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Des planches botaniques d'une beaut&eacute; &agrave; couper le souffle, dans la tradition des naturalistes. Chaque arbre est dessin&eacute; avec une pr&eacute;cision scientifique et une po&eacute;sie visuelle qui fascine les enfants. On l'emporte en promenade, on compare les feuilles, on apprend les noms. C'est un livre qui donne envie de sortir, de toucher l'&eacute;corce, de lever les yeux.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 5 ans</span>
+                    <span class="tag tag-level">Lecture accompagn&eacute;e</span>
+                </div>
+            </div>
+
+            <div class="book-card card-nature">
+                <div class="book-top">
+                    <div class="book-emoji">&#127780;&#65039;</div>
+                    <div class="book-info">
+                        <div class="book-title">Demain il fera beau</div>
+                        <div class="book-author">Rosie Eve</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Un ours polaire traverse un monde qui change — la glace fond, le paysage se transforme. Mais le ton n'est pas catastrophiste : c'est une histoire d'espoir, de r&eacute;silience et de beaut&eacute;. Les illustrations sont &agrave; elles seules une raison de l'acheter. Pour parler du climat avec les enfants sans leur faire peur, c'est le livre parfait.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 5 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+
+            <div class="book-card card-nature">
+                <div class="book-top">
+                    <div class="book-emoji">&#129430;</div>
+                    <div class="book-info">
+                        <div class="book-title">L'incroyable histoire de la vie sur Terre</div>
+                        <div class="book-author">Catherine Barr</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Des premi&egrave;res cellules dans l'oc&eacute;an aux dinosaures, des mammif&egrave;res &agrave; nous : 4 milliards d'ann&eacute;es en un album. C'est clair, accessible, et vertigineusement passionnant. Les enfants adorent les dinosaures, bien s&ucirc;r — mais ils sont encore plus fascin&eacute;s de d&eacute;couvrir que la vie est une histoire continue dont ils font partie. Un classique du documentaire jeunesse.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 6 ans</span>
+                    <span class="tag tag-level">Lecture accompagn&eacute;e</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: L'HUMOUR -->
+        <div class="section section-header-humor">
+            <div class="section-header">
+                <span class="section-icon">&#129315;</span>
+                <h2>L'humour</h2>
+            </div>
+
+            <div class="book-card card-humor">
+                <div class="book-top">
+                    <div class="book-emoji">&#129410;</div>
+                    <div class="book-info">
+                        <div class="book-title">Le loup en slip</div>
+                        <div class="book-author">Wilfrid Lupano</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Un loup terrrifiant qui porte un slip. Toute la for&ecirc;t a peur de lui — jusqu'&agrave; ce qu'on d&eacute;couvre son sous-v&ecirc;tement. L'humour fran&ccedil;ais &agrave; son meilleur : absurde, tendre et intelligent. En BD, avec des dessins magnifiques et des textes qui se lisent &agrave; plusieurs niveaux. Les enfants rient du slip ; les adultes rient de la satire sociale. Tout le monde gagne.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 5 ans</span>
+                    <span class="tag tag-level">Lecture accompagn&eacute;e</span>
+                </div>
+            </div>
+
+            <div class="book-card card-humor">
+                <div class="book-top">
+                    <div class="book-emoji">&#127979;</div>
+                    <div class="book-info">
+                        <div class="book-title">La ma&icirc;tresse est foldingue</div>
+                        <div class="book-author">Gutman &amp; Hallensleben</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    La ma&icirc;tresse fait n'importe quoi : elle danse sur les tables, elle chante faux, elle fait la course dans les couloirs. Les enfants sont ravis, le directeur est d&eacute;sesp&eacute;r&eacute;. C'est l'&eacute;cole r&ecirc;v&eacute;e. Un album joyeusement d&eacute;lirant qui fait du bien &agrave; tous ceux qui trouvent que l'&eacute;cole est parfois un peu trop sage.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+
+            <div class="book-card card-humor">
+                <div class="book-top">
+                    <div class="book-emoji">&#128048;</div>
+                    <div class="book-info">
+                        <div class="book-title">Caca boudin</div>
+                        <div class="book-author">Stephanie Blake</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Simon le lapin ne dit qu'une seule chose : &laquo;&nbsp;Caca boudin&nbsp;!&nbsp;&raquo; Au petit-d&eacute;jeuner, &agrave; l'&eacute;cole, face au loup. Chaque parent conna&icirc;t cette phase. Chaque enfant l'adore. C'est b&ecirc;te, c'est r&eacute;p&eacute;titif, c'est absolument g&eacute;nial. Et quand le loup arrive&hellip; Simon trouve enfin autre chose &agrave; dire. Un succ&egrave;s garanti &agrave; chaque lecture.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 4 ans</span>
+                    <span class="tag tag-level">Lu par l'adulte</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 6: APPRENDRE À LIRE SEUL -->
+        <div class="section section-header-reading">
+            <div class="section-header">
+                <span class="section-icon">&#128218;</span>
+                <h2>Apprendre &agrave; lire seul</h2>
+            </div>
+
+            <div class="book-card card-reading">
+                <div class="book-top">
+                    <div class="book-emoji">&#128214;</div>
+                    <div class="book-info">
+                        <div class="book-title">Collection &laquo;&nbsp;Premi&egrave;res lectures&nbsp;&raquo; Nathan</div>
+                        <div class="book-author">S&eacute;rie &laquo;&nbsp;Je lis tout seul&nbsp;&raquo;</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Chaque livre est pens&eacute; pour &ecirc;tre lu &agrave; deux, puis seul : les bulles sont pour l'enfant, le texte pour l'adulte. Progressivement, l'enfant prend le relais. C'est malin, bien calibr&eacute;, et les histoires sont vraiment chouettes. La fiert&eacute; dans les yeux d'un enfant qui termine son premier livre seul — cette collection vous l'offrira.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 6 ans</span>
+                    <span class="tag tag-level">Lecture autonome</span>
+                </div>
+            </div>
+
+            <div class="book-card card-reading">
+                <div class="book-top">
+                    <div class="book-emoji">&#128020;</div>
+                    <div class="book-info">
+                        <div class="book-title">Les P'tites Poules</div>
+                        <div class="book-author">Christian Jolibois</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Carmen, Carm&eacute;lito et B&eacute;lino sont des poules qui ne veulent pas rester au poulailler. Ils voyagent, rencontrent des personnages historiques, vivent des aventures d&eacute;lirantes. L'humour est truff&eacute; de r&eacute;f&eacute;rences culturelles (que les parents adorent) et les histoires sont assez courtes pour &ecirc;tre lues d'une traite. Parfait pour les premiers lecteurs en qu&ecirc;te d'ind&eacute;pendance.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 6 ans</span>
+                    <span class="tag tag-level">Lecture autonome</span>
+                </div>
+            </div>
+
+            <div class="book-card card-reading">
+                <div class="book-top">
+                    <div class="book-emoji">&#127891;</div>
+                    <div class="book-info">
+                        <div class="book-title">Collection Sami et Julie</div>
+                        <div class="book-author">Hachette &Eacute;ducation</div>
+                    </div>
+                </div>
+                <p class="book-review">
+                    Sami et Julie vivent des histoires du quotidien : la rentr&eacute;e, la neige, Halloween, le carnaval. Trois niveaux de lecture progressifs (d&eacute;but, milieu et fin de CP) permettent &agrave; l'enfant d'avancer &agrave; son rythme. Les textes sont courts, les mots sont simples, et les situations sont reconnaissables. C'est l'outil p&eacute;dagogique le plus vendu en France pour une bonne raison : &ccedil;a marche.
+                </p>
+                <div class="book-tags">
+                    <span class="tag tag-age">D&egrave;s 6 ans</span>
+                    <span class="tag tag-level">Lecture autonome</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIPS SECTION -->
+        <div class="tips-section">
+            <h2>Comment accompagner la lecture &agrave; cet &acirc;ge</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <p class="tip-text">
+                    <strong>Lisez &agrave; voix haute, m&ecirc;me quand ils savent lire seuls.</strong> La lecture partag&eacute;e n'est pas un outil p&eacute;dagogique — c'est un moment de lien. Votre voix, leur t&ecirc;te contre votre &eacute;paule, l'histoire qui avance ensemble : c'est &ccedil;a qu'ils retiennent. Continuez aussi longtemps qu'ils le demandent.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <p class="tip-text">
+                    <strong>Laissez-les choisir — m&ecirc;me si c'est la m&ecirc;me BD pour la 50&egrave;me fois.</strong> La relecture est un signe de confort, pas de paresse. Un enfant qui relit conna&icirc;t l'histoire par c&oelig;ur et travaille la fluidit&eacute;, la compr&eacute;hension fine, le plaisir pur. Ne forcez jamais &laquo;&nbsp;un vrai livre&nbsp;&raquo;. Tous les livres sont vrais.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <p class="tip-text">
+                    <strong>Parlez du livre apr&egrave;s : &laquo;&nbsp;Et toi, t'aurais fait quoi&nbsp;?&nbsp;&raquo;</strong> Pas un interrogatoire, pas un r&eacute;sum&eacute;. Juste une question ouverte qui les invite &agrave; habiter l'histoire. &laquo;&nbsp;Tu aurais eu peur &agrave; la place de Max&nbsp;?&nbsp;&raquo; &laquo;&nbsp;Tu crois que la chenille savait qu'elle allait devenir papillon&nbsp;?&nbsp;&raquo; La litt&eacute;rature commence l&agrave;.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <p class="tip-text">
+                    <strong>Allez en librairie comme on va au parc : pour le plaisir.</strong> Pas pour acheter. Pour toucher les livres, s'asseoir par terre, feuilleter, h&eacute;siter, revenir. Les libraires jeunesse sont des alli&eacute;s pr&eacute;cieux — ils connaissent les go&ucirc;ts de vos enfants parfois mieux que vous. La m&eacute;diath&egrave;que, c'est pareil : un terrain de jeu gratuit et infini.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <p class="tip-text">
+                    <strong>Offrez des livres comme on offre des jouets : souvent et sans occasion.</strong> Un livre dans la valise des vacances, un livre le mercredi, un livre &laquo;&nbsp;parce que j'ai pens&eacute; &agrave; toi&nbsp;&raquo;. Quand le livre cesse d'&ecirc;tre un objet sacr&eacute; pour devenir un objet du quotidien, la lecture cesse d'&ecirc;tre un devoir pour devenir un r&eacute;flexe.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-title">Mukashi Mukashi</div>
+        <p>Biblioth&egrave;que de Grand — S&eacute;lection 4-7 ans</p>
+        <p style="margin-top: 0.75rem;">
+            <a href="index.html">Retour au site principal</a>
+        </p>
+    </footer>
+
+</body>
+</html>

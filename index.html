@@ -1,743 +1,1553 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mukashi Mukashi — Il était une fois</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --coral: #FF6B6B;
-      --mint: #4ECDC4;
-      --sunshine: #FFE66D;
-      --lavender: #A78BFA;
-      --blush: #FFF0F0;
-      --deep: #2D3436;
-      --cream: #FFFDF7;
-      --soft-shadow: 0 4px 24px rgba(0,0,0,0.06);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mukashi Mukashi — Il était une fois...</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --coral: #FF6B6B;
+  --mint: #4ECDC4;
+  --sunshine: #FFE66D;
+  --lavender: #A78BFA;
+  --blush: #FFF0F0;
+  --deep: #2D3436;
+  --cream: #FFFDF7;
+  --coral-light: #ff9a9a;
+  --mint-light: #7eddd6;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
+  --radius: 20px;
+  --radius-sm: 12px;
+}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--cream);
-      color: var(--deep);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
 
-    /* Hero */
-    .hero {
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      position: relative;
-      background: linear-gradient(135deg, var(--blush) 0%, var(--cream) 50%, #E8F8F5 100%);
-    }
+body {
+  font-family: 'Nunito', sans-serif;
+  color: var(--deep);
+  background: var(--cream);
+  line-height: 1.7;
+  font-size: clamp(15px, 1.6vw, 18px);
+  -webkit-font-smoothing: antialiased;
+}
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(78,205,196,0.12) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.3;
+}
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
+img { max-width: 100%; }
+a { color: var(--coral); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--mint); }
 
-    .logo-kanji {
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      margin-bottom: 0.5rem;
-      opacity: 0.15;
-      letter-spacing: 1rem;
-      position: relative;
-      z-index: 1;
-    }
+.container {
+  width: min(92%, 1200px);
+  margin: 0 auto;
+}
 
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 6vw, 4.5rem);
-      font-weight: 700;
-      color: var(--deep);
-      margin-bottom: 0.5rem;
-      position: relative;
-      z-index: 1;
-    }
+/* NAV */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 253, 247, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 0 1rem;
+  transition: box-shadow .3s;
+}
+.site-nav.scrolled { box-shadow: var(--shadow-md); }
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 64px;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--deep);
+}
+.nav-logo span { color: var(--coral); }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--deep);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color .2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--coral); }
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: var(--deep);
+  border-radius: 2px;
+  transition: .3s;
+}
 
-    .hero h1 span {
-      color: var(--coral);
-    }
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--cream);
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0 2rem;
+    gap: 1rem;
+    transform: translateY(-120%);
+    transition: transform .35s ease;
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+  }
+  .nav-links.open { transform: translateY(0); }
+}
 
-    .hero .subtitle {
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-      color: #636e72;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-      position: relative;
-      z-index: 1;
-    }
+/* FADE-IN */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .hero .tagline {
-      max-width: 600px;
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
-      color: #636e72;
-      margin-bottom: 2.5rem;
-      position: relative;
-      z-index: 1;
-      padding: 0 1rem;
-    }
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--blush) 0%, var(--cream) 40%, #e8faf8 100%);
+  padding: 2rem 1rem;
+}
+.hero-kanji {
+  position: absolute;
+  font-size: clamp(180px, 30vw, 450px);
+  font-weight: 700;
+  color: rgba(255, 107, 107, 0.06);
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 750px;
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  margin-bottom: 0.5rem;
+}
+.hero h1 .coral { color: var(--coral); }
+.hero-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  color: var(--lavender);
+  margin-bottom: 1.2rem;
+}
+.hero-tagline {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: #636e72;
+  max-width: 540px;
+  margin: 0 auto 2.5rem;
+}
+.hero-cta {
+  display: inline-block;
+  background: var(--coral);
+  color: #fff;
+  padding: .9rem 2.4rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: .02em;
+  box-shadow: 0 4px 15px rgba(255,107,107,.35);
+  transition: transform .2s, box-shadow .2s;
+}
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(255,107,107,.45);
+  color: #fff;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  color: #b2bec3;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.scroll-arrow {
+  width: 24px;
+  height: 24px;
+  border-right: 2.5px solid var(--coral);
+  border-bottom: 2.5px solid var(--coral);
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 1; }
+  50% { transform: rotate(45deg) translateY(8px); opacity: .5; }
+}
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      animation: bounce 2s infinite;
-      color: var(--mint);
-      font-size: 1.5rem;
-      z-index: 1;
-    }
+/* SECTION STYLES */
+section {
+  padding: clamp(3rem, 8vw, 6rem) 0;
+}
+.section-badge {
+  display: inline-block;
+  background: var(--blush);
+  color: var(--coral);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: .35rem 1.1rem;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: 0.5rem;
+}
+.section-lead {
+  font-size: clamp(1rem, 1.8vw, 1.12rem);
+  color: #636e72;
+  max-width: 680px;
+  margin-bottom: 2.5rem;
+}
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
-    }
+/* THEME DU MOIS */
+.theme-header {
+  background: linear-gradient(135deg, #fff0f0 0%, #fce4ec 30%, #e8f5e9 60%, #e3f2fd 100%);
+  border-radius: var(--radius);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.theme-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(167,139,250,.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.theme-header .section-badge {
+  background: rgba(255,255,255,.7);
+}
+.theme-header h2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: .5rem;
+}
+.theme-emoji {
+  font-size: clamp(3rem, 6vw, 4rem);
+  display: block;
+  margin-bottom: 1rem;
+}
 
-    /* Sections */
-    section {
-      padding: 4rem 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+.theme-intro {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+.theme-intro p {
+  margin-bottom: 1.2rem;
+  color: #444;
+}
+.theme-intro p:first-child::first-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2em;
+  float: left;
+  line-height: .85;
+  margin-right: .12em;
+  color: var(--coral);
+  font-weight: 700;
+}
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
+/* BOOK CARDS */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.age-label {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  margin-bottom: 1.2rem;
+  padding-bottom: .5rem;
+  border-bottom: 3px solid var(--sunshine);
+  display: inline-block;
+}
+.book-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s, box-shadow .25s;
+  display: flex;
+  flex-direction: column;
+}
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.book-cover-placeholder {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  margin-bottom: 1.2rem;
+}
+.book-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: .2rem;
+}
+.book-card .book-author {
+  color: var(--lavender);
+  font-weight: 700;
+  font-size: .9rem;
+  margin-bottom: .5rem;
+}
+.book-card .book-age {
+  display: inline-block;
+  background: var(--sunshine);
+  color: var(--deep);
+  font-size: .75rem;
+  font-weight: 800;
+  padding: .2rem .7rem;
+  border-radius: 50px;
+  margin-bottom: .8rem;
+}
+.book-card .book-review {
+  font-size: .95rem;
+  color: #555;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+.book-love {
+  background: var(--blush);
+  border-radius: var(--radius-sm);
+  padding: .8rem 1rem;
+  font-size: .88rem;
+  color: var(--coral);
+  font-weight: 600;
+}
 
-    .section-header .icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
+/* ILLUSTRATION */
+.illustration-section {
+  text-align: center;
+  padding: 3rem 0;
+}
+.face-illustration {
+  max-width: 340px;
+  margin: 0 auto;
+}
 
-    .section-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 4vw, 2.5rem);
-      color: var(--deep);
-      margin-bottom: 0.5rem;
-    }
+/* ACTIVITY */
+.activity-section {
+  background: linear-gradient(180deg, #fff 0%, var(--blush) 100%);
+}
+.activity-header {
+  background: linear-gradient(135deg, var(--coral) 0%, var(--lavender) 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-lg);
+}
+.activity-header h2 { color: #fff; }
+.activity-header p { color: rgba(255,255,255,.9); }
 
-    .section-header p {
-      color: #636e72;
-      font-size: clamp(0.9rem, 2vw, 1.05rem);
-      max-width: 600px;
-      margin: 0 auto;
-    }
+.materials-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  list-style: none;
+}
+.materials-list li {
+  background: #fff;
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.2rem;
+  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+.materials-list .mat-icon { font-size: 1.4rem; }
 
-    /* Concept cards */
-    .concept-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
+.steps-list {
+  list-style: none;
+  max-width: 750px;
+  margin: 0 auto 3rem;
+}
+.step-item {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+.step-number {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--coral);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.step-text {
+  padding-top: .5rem;
+}
+.step-text strong {
+  color: var(--deep);
+}
 
-    .concept-card {
-      background: white;
-      border-radius: 20px;
-      padding: 1.75rem;
-      box-shadow: var(--soft-shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border-top: 4px solid var(--mint);
-    }
+.wheel-container {
+  text-align: center;
+  margin: 2rem auto 3rem;
+  max-width: 420px;
+}
+.wheel-container svg { width: 100%; height: auto; }
 
-    .concept-card:nth-child(2) { border-top-color: var(--coral); }
-    .concept-card:nth-child(3) { border-top-color: var(--lavender); }
-    .concept-card:nth-child(4) { border-top-color: var(--sunshine); }
+.usage-box, .variant-box {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.variant-box {
+  border-left: 5px solid var(--lavender);
+}
 
-    .concept-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
+/* PARENTS */
+.parents-section {
+  background: var(--cream);
+}
+.parents-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.parents-header h2 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+}
+.parents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 1rem;
+}
+.parent-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: transform .2s;
+}
+.parent-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.parent-card-border {
+  width: 5px;
+  border-radius: 3px;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+.parent-emoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.parent-card p {
+  font-size: .95rem;
+  color: #444;
+}
+.parent-card p strong {
+  color: var(--deep);
+}
+.parents-cta {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--blush);
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--coral);
+}
 
-    .concept-card .card-icon {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-    }
+/* PODCAST */
+.podcast-section {
+  background: linear-gradient(180deg, var(--blush) 0%, var(--cream) 100%);
+}
+.podcast-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  max-width: 850px;
+  margin: 0 auto;
+}
+.podcast-player {
+  background: linear-gradient(135deg, var(--deep) 0%, #636e72 100%);
+  color: #fff;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--coral);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform .2s;
+  box-shadow: 0 4px 15px rgba(255,107,107,.4);
+}
+.play-btn:hover { transform: scale(1.08); }
+.play-btn svg { fill: #fff; margin-left: 4px; }
+.podcast-meta h3 {
+  color: #fff;
+  font-size: 1.15rem;
+  margin-bottom: .3rem;
+}
+.podcast-meta p {
+  color: rgba(255,255,255,.7);
+  font-size: .85rem;
+}
+.podcast-progress {
+  height: 4px;
+  background: rgba(255,255,255,.15);
+  border-radius: 2px;
+  margin-top: .8rem;
+  position: relative;
+}
+.podcast-progress::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 35%;
+  background: var(--coral);
+  border-radius: 2px;
+}
+.podcast-body {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+.podcast-body h4 {
+  font-size: 1.2rem;
+  margin: 1.8rem 0 .8rem;
+  color: var(--coral);
+}
+.podcast-body h4:first-child { margin-top: 0; }
+.podcast-body p, .podcast-body blockquote {
+  color: #555;
+  margin-bottom: 1rem;
+}
+.podcast-story {
+  background: var(--blush);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  font-style: italic;
+  border-left: 4px solid var(--coral);
+  margin: 1rem 0;
+  color: #444;
+}
+.meditation-script {
+  background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  color: #444;
+  line-height: 2;
+}
+.meditation-script em {
+  color: var(--mint);
+  font-style: normal;
+  font-weight: 700;
+}
 
-    .concept-card h3 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      color: var(--deep);
-    }
+/* PARTICIPATIVE */
+.participative-section {
+  background: var(--cream);
+}
+.story-beginning {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  max-width: 750px;
+  margin: 0 auto 2rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #444;
+  border-left: 5px solid var(--sunshine);
+  line-height: 1.9;
+}
+.story-beginning .first-words {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3em;
+  font-style: normal;
+  color: var(--coral);
+  font-weight: 700;
+}
+.textarea-mockup {
+  max-width: 750px;
+  margin: 0 auto 1.5rem;
+  background: #fff;
+  border: 2px dashed var(--mint);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  min-height: 160px;
+  color: #b2bec3;
+  font-style: italic;
+  font-size: .95rem;
+  position: relative;
+}
+.textarea-mockup::after {
+  content: 'Écris la suite ici...';
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+.story-submit-btn {
+  display: block;
+  max-width: 750px;
+  margin: 0 auto 1rem;
+  background: var(--mint);
+  color: #fff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: transform .2s;
+}
+.story-submit-btn:hover { transform: translateY(-2px); }
+.story-note {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto;
+  color: var(--lavender);
+  font-weight: 700;
+  font-size: .95rem;
+}
 
-    .concept-card p, .concept-card ul {
-      color: #636e72;
-      font-size: 0.92rem;
-    }
+/* RESOURCES */
+.resources-section {
+  background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
+}
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 1.5rem;
+}
+.resource-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: transform .25s, box-shadow .25s;
+}
+.resource-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.resource-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.resource-card h4 { margin-bottom: .5rem; font-size: 1.15rem; }
+.resource-card p { color: #636e72; font-size: .9rem; margin-bottom: 1.2rem; }
+.resource-btn {
+  display: inline-block;
+  padding: .6rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: .88rem;
+  color: #fff;
+  transition: transform .2s;
+}
+.resource-btn:hover { transform: translateY(-2px); color: #fff; }
 
-    .concept-card ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 0.5rem;
-    }
+/* NEWSLETTER */
+.newsletter-section {
+  background: linear-gradient(135deg, var(--coral) 0%, var(--lavender) 100%);
+  color: #fff;
+  text-align: center;
+}
+.newsletter-section h2 { color: #fff; font-size: clamp(1.6rem, 4vw, 2.5rem); }
+.newsletter-section p { color: rgba(255,255,255,.9); }
+.newsletter-form {
+  display: flex;
+  gap: .8rem;
+  max-width: 520px;
+  margin: 1.5rem auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.newsletter-form input {
+  flex: 1;
+  min-width: 240px;
+  padding: .9rem 1.4rem;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  outline: none;
+}
+.newsletter-form button {
+  background: var(--deep);
+  color: #fff;
+  border: none;
+  padding: .9rem 2rem;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform .2s;
+}
+.newsletter-form button:hover { transform: translateY(-2px); }
+.newsletter-perks {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .8rem 2rem;
+  margin-top: 1.5rem;
+}
+.newsletter-perks li {
+  font-size: .9rem;
+  font-weight: 600;
+}
 
-    .concept-card ul li {
-      padding: 0.25rem 0;
-      padding-left: 1.2rem;
-      position: relative;
-    }
+/* LIBRAIRIES */
+.librairies-section {
+  background: var(--cream);
+}
+.librairies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 1.2rem;
+}
+.lib-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.5rem 1.8rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  transition: transform .2s;
+}
+.lib-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.lib-pin {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: .2rem;
+}
+.lib-card h4 { font-size: 1.05rem; margin-bottom: .15rem; }
+.lib-card .lib-address {
+  font-size: .82rem;
+  color: var(--mint);
+  font-weight: 700;
+  margin-bottom: .3rem;
+}
+.lib-card .lib-desc {
+  font-size: .9rem;
+  color: #636e72;
+}
 
-    .concept-card ul li::before {
-      content: '›';
-      position: absolute;
-      left: 0;
-      color: var(--mint);
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
+/* FOOTER */
+.site-footer {
+  background: var(--deep);
+  color: rgba(255,255,255,.75);
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .3rem;
+}
+.footer-logo span { color: var(--coral); }
+.footer-tagline {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  font-size: .95rem;
+}
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.footer-social {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.1rem;
+  transition: background .2s;
+  text-decoration: none;
+}
+.footer-social:hover { background: var(--coral); color: #fff; }
+.footer-note {
+  font-size: .82rem;
+  color: rgba(255,255,255,.45);
+  max-width: 500px;
+  margin: 0 auto;
+}
 
-    .concept-card:nth-child(2) ul li::before { color: var(--coral); }
-    .concept-card:nth-child(3) ul li::before { color: var(--lavender); }
-    .concept-card:nth-child(4) ul li::before { color: var(--sunshine); }
-
-    /* Themes section */
-    .themes-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-
-    .theme-tag {
-      background: white;
-      padding: 0.45rem 1rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: clamp(0.8rem, 2vw, 0.95rem);
-      box-shadow: var(--soft-shadow);
-      transition: transform 0.2s ease;
-      cursor: default;
-      white-space: nowrap;
-    }
-
-    .theme-tag:hover { transform: scale(1.08); }
-
-    .theme-tag:nth-child(odd) { border: 2px solid var(--mint); color: #2d9e96; }
-    .theme-tag:nth-child(even) { border: 2px solid var(--coral); color: #e05555; }
-    .theme-tag:nth-child(3n) { border: 2px solid var(--lavender); color: #7c5fbf; }
-
-    /* Parents section */
-    .parents-section {
-      background: linear-gradient(135deg, #FFF0F0, #FFF8E7);
-      border-radius: 24px;
-      padding: 3rem 1.5rem;
-      margin: 2rem auto;
-      max-width: 1000px;
-    }
-
-    .parents-examples {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .parent-item {
-      background: white;
-      border-radius: 16px;
-      padding: 1rem 1.25rem;
-      box-shadow: var(--soft-shadow);
-      font-size: 0.92rem;
-      color: var(--deep);
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      transition: transform 0.2s ease;
-    }
-
-    .parent-item:hover { transform: translateX(4px); }
-
-    .parent-item .emoji {
-      font-size: 1.3rem;
-      flex-shrink: 0;
-      line-height: 1.5;
-    }
-
-    /* Strategy section */
-    .strategy-timeline {
-      position: relative;
-      margin-top: 2rem;
-      padding-left: 0;
-    }
-
-    .strategy-timeline::before {
-      content: '';
-      position: absolute;
-      left: 24px;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: linear-gradient(to bottom, var(--mint), var(--coral), var(--lavender));
-      border-radius: 2px;
-    }
-
-    .strategy-step {
-      display: flex;
-      gap: 1.25rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-
-    .step-dot {
-      width: 48px;
-      height: 48px;
-      min-width: 48px;
-      border-radius: 50%;
-      background: white;
-      border: 3px solid var(--mint);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: var(--mint);
-      flex-shrink: 0;
-      z-index: 1;
-      box-shadow: var(--soft-shadow);
-    }
-
-    .strategy-step:nth-child(2) .step-dot { border-color: var(--coral); color: var(--coral); }
-    .strategy-step:nth-child(3) .step-dot { border-color: var(--lavender); color: var(--lavender); }
-
-    .step-content {
-      background: white;
-      border-radius: 16px;
-      padding: 1.25rem;
-      box-shadow: var(--soft-shadow);
-      flex: 1;
-      min-width: 0;
-    }
-
-    .step-content h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: 0.4rem;
-    }
-
-    .step-content p {
-      color: #636e72;
-      font-size: 0.92rem;
-    }
-
-    /* Platforms */
-    .platforms {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
-      gap: 1.25rem;
-      margin-top: 2rem;
-    }
-
-    .platform-card {
-      background: white;
-      border-radius: 16px;
-      padding: 1.5rem 1rem;
-      text-align: center;
-      box-shadow: var(--soft-shadow);
-      transition: transform 0.3s ease;
-    }
-
-    .platform-card:hover { transform: translateY(-4px); }
-
-    .platform-card .p-icon { font-size: 2.2rem; margin-bottom: 0.5rem; }
-    .platform-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.4rem; }
-    .platform-card p { color: #636e72; font-size: 0.88rem; }
-
-    /* Resources */
-    .resources-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-      gap: 1.25rem;
-      margin-top: 2rem;
-    }
-
-    .resource-card {
-      background: white;
-      border-radius: 16px;
-      padding: 1.5rem 1rem;
-      box-shadow: var(--soft-shadow);
-      text-align: center;
-      border-bottom: 4px solid var(--mint);
-    }
-
-    .resource-card:nth-child(2) { border-bottom-color: var(--coral); }
-    .resource-card:nth-child(3) { border-bottom-color: var(--lavender); }
-
-    .resource-card .r-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-    .resource-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .resource-card p { color: #636e72; font-size: 0.88rem; }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 3rem 1.5rem;
-      background: var(--deep);
-      color: white;
-    }
-
-    footer h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      margin-bottom: 0.5rem;
-    }
-
-    footer p {
-      color: rgba(255,255,255,0.6);
-      font-size: 0.92rem;
-    }
-
-    /* Animations on scroll */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Mobile-specific adjustments */
-    @media (max-width: 480px) {
-      .hero { padding: 2rem 1rem; }
-      section { padding: 3rem 1rem; }
-      .parents-section {
-        padding: 2rem 1rem;
-        border-radius: 16px;
-        margin: 1rem 0.5rem;
-      }
-      .concept-card { padding: 1.5rem; }
-      .strategy-timeline::before { left: 22px; }
-      .step-dot { width: 44px; height: 44px; min-width: 44px; font-size: 1rem; }
-      .strategy-step { gap: 1rem; }
-      .step-content { padding: 1rem; }
-      .parent-item { padding: 0.85rem 1rem; font-size: 0.88rem; }
-      .theme-tag { padding: 0.4rem 0.8rem; font-size: 0.82rem; }
-      .themes-cloud { gap: 0.5rem; }
-    }
-
-    @media (max-width: 360px) {
-      .hero h1 { font-size: 1.8rem; }
-      .logo-kanji { font-size: 2rem; letter-spacing: 0.5rem; }
-      .concept-grid { gap: 1rem; }
-      .parents-examples { gap: 0.75rem; }
-    }
-
-    /* Tablet */
-    @media (min-width: 481px) and (max-width: 768px) {
-      section { padding: 3.5rem 1.5rem; }
-      .parents-section { margin: 2rem 1rem; }
-    }
-
-    /* Hover only on devices that support it */
-    @media (hover: none) {
-      .concept-card:hover,
-      .platform-card:hover { transform: none; }
-      .parent-item:hover { transform: none; }
-      .theme-tag:hover { transform: none; }
-    }
-  </style>
+/* TOUCH DEVICES */
+@media (hover: none) {
+  .book-card:hover,
+  .parent-card:hover,
+  .lib-card:hover,
+  .resource-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+}
+</style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <div class="hero">
-    <div class="logo-kanji">昔々</div>
-    <h1><span>Mukashi</span> Mukashi</h1>
-    <p class="subtitle">Il était une fois...</p>
-    <p class="tagline">
-      Un univers mensuel autour de la lecture, de la créativité et de la parentalité.
-      Chaque mois, un thème. Chaque thème, mille histoires à partager en famille.
-    </p>
-    <div class="scroll-hint">&#8595;</div>
+<!-- NAV -->
+<nav class="site-nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo"><span>Mukashi</span> Mukashi</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#theme">Thème du mois</a></li>
+      <li><a href="#activite">Activité</a></li>
+      <li><a href="#parents">Parents</a></li>
+      <li><a href="#podcast">Podcast</a></li>
+      <li><a href="#histoires">Histoires</a></li>
+      <li><a href="#ressources">Ressources</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
+    </ul>
   </div>
+</nav>
 
-  <!-- Le concept -->
-  <section>
-    <div class="section-header fade-in">
-      <span class="icon">&#9733;</span>
-      <h2>Le Concept</h2>
-      <p>Un écosystème de contenus autour de l'enfance, structuré en quatre univers complémentaires.</p>
-    </div>
-    <div class="concept-grid">
-      <div class="concept-card fade-in">
-        <div class="card-icon">&#128218;</div>
-        <h3>Les Livres</h3>
-        <p>Recommandations bibliographiques mensuelles en lien avec le thème.</p>
-        <ul>
-          <li>Carrousel Instagram avec mises en scène</li>
-          <li>Vidéos de présentation</li>
-          <li>Blog avec bibliographies complètes</li>
-        </ul>
-      </div>
-      <div class="concept-card fade-in">
-        <div class="card-icon">&#127911;</div>
-        <h3>Le Podcast</h3>
-        <p>Un format audio intime et engageant.</p>
-        <ul>
-          <li>Q&amp;R avec les enfants de la communauté</li>
-          <li>Histoire inédite racontée</li>
-          <li>Méditation parent/enfant</li>
-        </ul>
-      </div>
-      <div class="concept-card fade-in">
-        <div class="card-icon">&#9999;&#65039;</div>
-        <h3>Les Activités</h3>
-        <p>Une activité créative par mois en lien avec le thème.</p>
-        <ul>
-          <li>Carrousel Instagram avec photos</li>
-          <li>Déroulé complet sur le blog</li>
-          <li>Supports à imprimer</li>
-        </ul>
-      </div>
-      <div class="concept-card fade-in">
-        <div class="card-icon">&#128104;&#8205;&#128105;&#8205;&#128103;</div>
-        <h3>Les Parents !</h3>
-        <p>Le format viral : illustrations humoristiques sur les contradictions des parents.</p>
-        <ul>
-          <li>Illustrations originales</li>
-          <li>Ton décalé et bienveillant</li>
-          <li>Fort potentiel de partage</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Themes -->
-  <section>
-    <div class="section-header fade-in">
-      <span class="icon">&#127912;</span>
-      <h2>Les Thèmes</h2>
-      <p>Chaque mois, un nouveau thème ouvre un monde d'histoires, d'activités et de découvertes.</p>
-    </div>
-    <div class="themes-cloud fade-in">
-      <span class="theme-tag">Les couleurs</span>
-      <span class="theme-tag">La confiance en soi</span>
-      <span class="theme-tag">L'eau</span>
-      <span class="theme-tag">Le pôle Nord</span>
-      <span class="theme-tag">La magie</span>
-      <span class="theme-tag">Les amis</span>
-      <span class="theme-tag">La rentrée</span>
-      <span class="theme-tag">Le rêve</span>
-      <span class="theme-tag">La vieillesse</span>
-      <span class="theme-tag">Les émotions</span>
-      <span class="theme-tag">La nature</span>
-      <span class="theme-tag">Les voyages</span>
-      <span class="theme-tag">La musique</span>
-      <span class="theme-tag">Les saisons</span>
-    </div>
-  </section>
-
-  <!-- Les Parents -->
-  <div class="parents-section">
-    <div class="section-header fade-in">
-      <span class="icon">&#128517;</span>
-      <h2>Il était une fois... les Parents !</h2>
-      <p>Pourquoi les parents disent une chose et font le contraire ? Des illustrations drôles et tendres.</p>
-    </div>
-    <div class="parents-examples">
-      <div class="parent-item fade-in">
-        <span class="emoji">&#129296;</span>
-        <span>Pourquoi tes parents t'interdisent de dire des gros mots <strong>alors qu'eux en disent tout le temps</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#127829;</span>
-        <span>Pourquoi tes parents te disent de manger des légumes <strong>alors qu'eux aussi préfèrent les pizzas</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#129463;</span>
-        <span>Pourquoi tes parents te demandent de te brosser les dents 3 minutes <strong>alors qu'eux le font en 3 secondes</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#128084;</span>
-        <span>Pourquoi tes parents te demandent de mettre un pyjama <strong>alors que papa dort en slip</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#127769;</span>
-        <span>Pourquoi tes parents veulent que tu te couches tôt <strong>alors qu'eux vont au lit ultra-tard</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#128168;</span>
-        <span>Pourquoi on te dit que ça ne se fait pas de péter en public <strong>alors qu'à la maison tu entends souvent les prouts de maman</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#128241;</span>
-        <span>Pourquoi tes parents t'interdisent les écrans <strong>alors qu'eux le font tout le temps</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#129317;</span>
-        <span>Pourquoi tes parents te disent de ne pas mentir <strong>alors qu'ils racontent des carabistouilles</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#127852;</span>
-        <span>Pourquoi on te dit de ne pas te gaver de bonbons <strong>alors qu'ils les mangent en cachette</strong> ?</span>
-      </div>
-      <div class="parent-item fade-in">
-        <span class="emoji">&#128227;</span>
-        <span>Pourquoi tes parents crient parfois <strong>alors qu'ils te disent qu'il y a « un autre moyen d'exprimer ta colère »</strong> ?</span>
-      </div>
-    </div>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-kanji" aria-hidden="true">昔々</div>
+  <div class="hero-content fade-in">
+    <h1><span class="coral">Mukashi</span> Mukashi</h1>
+    <p class="hero-subtitle">Il était une fois...</p>
+    <p class="hero-tagline">Chaque mois, un nouveau thème à explorer en famille : des livres choisis avec soin, des activités créatives, des histoires inédites et une bonne dose de tendresse.</p>
+    <a href="#theme" class="hero-cta">Découvrir le thème du mois</a>
   </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <span>Explorer</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
 
-  <!-- Strategie -->
-  <section>
-    <div class="section-header fade-in">
-      <span class="icon">&#128640;</span>
-      <h2>Stratégie de Lancement</h2>
-      <p>Une montée en puissance progressive pour installer le projet durablement.</p>
+<!-- THÈME DU MOIS -->
+<section id="theme">
+  <div class="container">
+
+    <div class="theme-header fade-in">
+      <span class="theme-emoji" aria-hidden="true">🎭</span>
+      <span class="section-badge">Thème du mois</span>
+      <h2>Les Émotions</h2>
+      <p class="section-lead" style="margin:0 auto;">Quand les livres aident les enfants à mettre des mots sur ce qu'ils ressentent.</p>
     </div>
-    <div class="strategy-timeline">
-      <div class="strategy-step fade-in">
-        <div class="step-dot">1</div>
-        <div class="step-content">
-          <h3>Phase 1 : Ancrage</h3>
-          <p>Lancer Instagram avec deux piliers : les recommandations livres (carrousels mensuels) et la série « Les Parents » (illustrations humoristiques). Créer le blog avec les bibliographies et les 2 ebooks gratuits.</p>
+
+    <div class="theme-intro fade-in">
+      <p>Les émotions, ça commence tôt. Bien avant de savoir les nommer, les enfants les vivent avec une intensité que nous, adultes, avons parfois oubliée. La joie qui fait sauter sur place, la colère qui monte comme une vague, la tristesse qui serre le ventre, la peur qui fait battre le cœur très fort... Tout est immense quand on a deux, trois, cinq ans. Et pourtant, on attend souvent d'eux qu'ils « gèrent » ce qu'ils ne comprennent pas encore.</p>
+      <p>C'est là que les livres deviennent des alliés précieux. Parce qu'une histoire, c'est un miroir. Quand un enfant voit un petit monstre tout emmêlé dans ses émotions, ou un loup qui hurle de colère, il se reconnaît. Il comprend qu'il n'est pas seul, que ce qu'il ressent est normal, et que ça porte un nom. Nommer une émotion, c'est déjà commencer à l'apprivoiser.</p>
+      <p>Ce mois-ci, nous avons sélectionné des albums qui font exactement cela : ils ouvrent la porte aux émotions avec douceur, humour et poésie. Des livres pour les tout-petits qui découvrent, et pour les plus grands qui apprennent à naviguer dans leur monde intérieur. Accompagnés d'une activité à faire ensemble et d'une histoire inédite, ce thème est une invitation à ressentir, partager et grandir — en famille.</p>
+    </div>
+
+    <!-- Sélection 0-3 ans -->
+    <h3 class="age-label fade-in">📚 Sélection 0-3 ans</h3>
+    <div class="books-grid">
+
+      <article class="book-card fade-in">
+        <div class="book-cover-placeholder" style="background: linear-gradient(135deg, #FFE66D, #FF6B6B, #4ECDC4, #A78BFA);">📖</div>
+        <span class="book-age">Dès 2 ans</span>
+        <h4>La couleur des émotions</h4>
+        <p class="book-author">Anna Llenas</p>
+        <p class="book-review">Le monstre des couleurs s'est réveillé tout bizarre, tout mélangé. Ses émotions sont sens dessus dessous ! Il va falloir les trier, les ranger chacune dans un bocal. Avec ses pop-up spectaculaires et ses couleurs franches, cet album est devenu LA référence pour parler des émotions aux tout-petits. Chaque double page est un émerveillement.</p>
+        <div class="book-love">Un livre qu'on relit des centaines de fois sans se lasser, et qui donne aux enfants un vocabulaire émotionnel solide dès le plus jeune âge.</div>
+      </article>
+
+      <article class="book-card fade-in">
+        <div class="book-cover-placeholder" style="background: linear-gradient(135deg, #FF6B6B, #c0392b);">📖</div>
+        <span class="book-age">Dès 2 ans</span>
+        <h4>Grosse colère</h4>
+        <p class="book-author">Mireille d'Allancé</p>
+        <p class="book-review">Robert a passé une très mauvaise journée. Quand il est envoyé dans sa chambre, sa colère sort de lui — littéralement. Elle devient une énorme Chose rouge qui casse tout, renverse tout, détruit tout. Robert, effrayé par ce monstre qu'il a créé, décide de le remettre à sa place. Une métaphore puissante et libératrice.</p>
+        <div class="book-love">La scène où Robert voit sa colère rétrécir quand il la maîtrise est un moment de lecture magique. Les enfants comprennent viscéralement ce que « se calmer » veut dire.</div>
+      </article>
+
+      <article class="book-card fade-in">
+        <div class="book-cover-placeholder" style="background: linear-gradient(135deg, #2D3436, #636e72);">🐟</div>
+        <span class="book-age">Dès 18 mois</span>
+        <h4>Aujourd'hui je suis...</h4>
+        <p class="book-author">Mies van Hout</p>
+        <p class="book-review">Des poissons, des pastels, un fond noir. C'est tout, et c'est immense. Chaque poisson exprime une émotion — content, triste, curieux, timide, jaloux, amoureux — avec une expressivité saisissante. Le texte est minimal : juste le mot de l'émotion. Mais les illustrations parlent d'elles-mêmes, avec une force qui touche les enfants comme les adultes.</p>
+        <div class="book-love">Un album artistique qui respecte l'intelligence des tout-petits. Parfait pour pointer du doigt et dire « et toi, aujourd'hui, tu es comment ? »</div>
+      </article>
+
+    </div>
+
+    <!-- Sélection 4-7 ans -->
+    <h3 class="age-label fade-in">📚 Sélection 4-7 ans</h3>
+    <div class="books-grid">
+
+      <article class="book-card fade-in">
+        <div class="book-cover-placeholder" style="background: linear-gradient(135deg, #4ECDC4, #2ecc71);">🐺</div>
+        <span class="book-age">Dès 4 ans</span>
+        <h4>Le loup qui apprivoisait ses émotions</h4>
+        <p class="book-author">Orianne Lallemand</p>
+        <p class="book-review">Loup a un problème : il est trop émotif. Quand il est content, il saute partout. Quand il est triste, il inonde tout de ses larmes. Quand il est en colère, c'est la catastrophe. Ses amis de la forêt vont l'aider à trouver des solutions pour chaque émotion. Une histoire drôle et bienveillante dans l'univers du célèbre Loup.</p>
+        <div class="book-love">Les enfants adorent retrouver Loup, et cette fois il leur montre que ressentir fort n'est pas un défaut — il faut juste apprendre quelques astuces.</div>
+      </article>
+
+      <article class="book-card fade-in">
+        <div class="book-cover-placeholder" style="background: linear-gradient(135deg, #A78BFA, #e056a0);">🦄</div>
+        <span class="book-age">Dès 3 ans</span>
+        <h4>Les émotions de Gaston</h4>
+        <p class="book-author">Aurélie Chien Chow Chung</p>
+        <p class="book-review">Gaston est une petite licorne dont la crinière change de couleur selon son humeur. Quand il est joyeux, elle est jaune ; quand il a peur, elle est violette. Chaque émotion est présentée, expliquée, et surtout accompagnée d'un petit exercice de sophrologie — une respiration, une visualisation — pour aider l'enfant à retrouver le calme.</p>
+        <div class="book-love">Un livre-outil qui va au-delà de l'histoire : les exercices de respiration fonctionnent vraiment, et les enfants les redemandent avant de dormir !</div>
+      </article>
+
+      <article class="book-card fade-in">
+        <div class="book-cover-placeholder" style="background: linear-gradient(135deg, #FFE66D, #f39c12);">🐱</div>
+        <span class="book-age">Dès 5 ans</span>
+        <h4>Sam &amp; Watson plus forts que la colère</h4>
+        <p class="book-author">Ghislaine Dulier</p>
+        <p class="book-review">Sam est en colère. Très en colère. Watson, son chat philosophe, l'écoute, le questionne, et l'accompagne avec sagesse et tendresse. Ensemble, ils explorent ce qu'est la colère, d'où elle vient, et comment la transformer en quelque chose de positif. Les dialogues sont justes, les illustrations chaleureuses.</p>
+        <div class="book-love">Le duo Sam et Watson aborde les grandes questions avec une simplicité désarmante. Le chat Watson est le philosophe que chaque enfant mériterait d'avoir.</div>
+      </article>
+
+    </div>
+
+    <!-- Illustration -->
+    <div class="illustration-section fade-in">
+      <h3 class="age-label">🎨 Illustration du mois</h3>
+      <div class="face-illustration">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration abstraite d'un visage avec des émotions colorées">
+          <circle cx="200" cy="200" r="120" fill="#FFF0F0" stroke="#2D3436" stroke-width="2"/>
+          <ellipse cx="165" cy="175" rx="18" ry="22" fill="#2D3436"/>
+          <ellipse cx="235" cy="175" rx="18" ry="22" fill="#2D3436"/>
+          <circle cx="160" cy="168" r="6" fill="#fff"/>
+          <circle cx="230" cy="168" r="6" fill="#fff"/>
+          <path d="M 160 240 Q 200 275 240 240" fill="none" stroke="#2D3436" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="80" cy="100" r="28" fill="#FF6B6B" opacity="0.7"/>
+          <text x="80" y="105" text-anchor="middle" fill="#fff" font-size="12" font-family="Nunito, sans-serif" font-weight="700">Joie</text>
+          <circle cx="320" cy="90" r="28" fill="#5B9BD5" opacity="0.7"/>
+          <text x="320" y="95" text-anchor="middle" fill="#fff" font-size="11" font-family="Nunito, sans-serif" font-weight="700">Tristesse</text>
+          <circle cx="50" cy="250" r="28" fill="#FFE66D" opacity="0.8"/>
+          <text x="50" y="255" text-anchor="middle" fill="#2D3436" font-size="10" font-family="Nunito, sans-serif" font-weight="700">Surprise</text>
+          <circle cx="350" cy="260" r="28" fill="#A78BFA" opacity="0.7"/>
+          <text x="350" y="265" text-anchor="middle" fill="#fff" font-size="12" font-family="Nunito, sans-serif" font-weight="700">Peur</text>
+          <circle cx="110" cy="350" r="28" fill="#4ECDC4" opacity="0.7"/>
+          <text x="110" y="355" text-anchor="middle" fill="#fff" font-size="11" font-family="Nunito, sans-serif" font-weight="700">Dégoût</text>
+          <circle cx="290" cy="355" r="28" fill="#e17055" opacity="0.7"/>
+          <text x="290" y="360" text-anchor="middle" fill="#fff" font-size="11" font-family="Nunito, sans-serif" font-weight="700">Colère</text>
+          <circle cx="145" cy="215" r="14" fill="#FF6B6B" opacity="0.2"/>
+          <circle cx="255" cy="215" r="14" fill="#FF6B6B" opacity="0.2"/>
+        </svg>
+      </div>
+      <p style="color:#636e72; margin-top:1rem; font-style:italic;">Un visage, mille émotions — et c'est normal.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ACTIVITÉ -->
+<section class="activity-section" id="activite">
+  <div class="container">
+
+    <div class="activity-header fade-in">
+      <span class="section-badge" style="background:rgba(255,255,255,.2); color:#fff;">Activité du mois</span>
+      <h2>La Roue des Émotions</h2>
+      <p>Un outil simple et beau à fabriquer ensemble pour apprendre à identifier, nommer et exprimer ce qu'on ressent au quotidien.</p>
+    </div>
+
+    <h3 class="age-label fade-in">🧰 Matériel nécessaire</h3>
+    <ul class="materials-list fade-in">
+      <li><span class="mat-icon">📄</span> Deux assiettes en carton (ou carton épais découpé en cercle)</li>
+      <li><span class="mat-icon">🖍️</span> Crayons de couleur ou feutres (6 couleurs)</li>
+      <li><span class="mat-icon">✂️</span> Ciseaux</li>
+      <li><span class="mat-icon">📌</span> Une attache parisienne</li>
+      <li><span class="mat-icon">📏</span> Une règle</li>
+      <li><span class="mat-icon">✏️</span> Un crayon à papier</li>
+    </ul>
+
+    <h3 class="age-label fade-in">📝 Étapes de fabrication</h3>
+    <ol class="steps-list fade-in">
+      <li class="step-item">
+        <div class="step-number">1</div>
+        <div class="step-text"><strong>Diviser le cercle.</strong> Prenez la première assiette en carton et tracez 6 parts égales, comme une pizza. Chaque part représentera une émotion. Utilisez la règle pour tracer les lignes du centre vers le bord.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">2</div>
+        <div class="step-text"><strong>Colorier les sections.</strong> Coloriez chaque part d'une couleur différente : jaune pour la joie, bleu pour la tristesse, rouge pour la colère, violet pour la peur, vert pour le dégoût, et orange pour la surprise. N'hésitez pas à bien appuyer pour des couleurs vives !</div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">3</div>
+        <div class="step-text"><strong>Dessiner les visages.</strong> Dans chaque section, dessinez un petit visage qui exprime l'émotion : un grand sourire pour la joie, des larmes pour la tristesse, des sourcils froncés pour la colère, des yeux écarquillés pour la peur, une langue tirée pour le dégoût, et une bouche en O pour la surprise.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">4</div>
+        <div class="step-text"><strong>Préparer la fenêtre.</strong> Sur la deuxième assiette, découpez une « fenêtre » en forme de part de pizza (un sixième du cercle), pour ne laisser apparaître qu'une seule émotion à la fois. Écrivez « Comment je me sens ? » en haut de cette assiette.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">5</div>
+        <div class="step-text"><strong>Assembler la roue.</strong> Superposez les deux assiettes (celle avec la fenêtre au-dessus) et fixez-les au centre avec l'attache parisienne. Vérifiez que la roue tourne bien et que chaque émotion apparaît dans la fenêtre.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-number">6</div>
+        <div class="step-text"><strong>Décorer !</strong> Ajoutez le prénom de l'enfant, des autocollants, des paillettes, des petits dessins... C'est SA roue, elle doit lui ressembler. Vous pouvez aussi plastifier l'ensemble pour qu'elle résiste aux petites mains.</div>
+      </li>
+    </ol>
+
+    <!-- Emotion Wheel SVG -->
+    <div class="wheel-container fade-in">
+      <h3 class="age-label">🎡 La Roue des Émotions</h3>
+      <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roue des émotions avec six sections colorées">
+        <!-- Joie (yellow) 0-60 -->
+        <path d="M250,250 L250,30 A220,220 0 0,1 440.5,140 Z" fill="#FFE66D"/>
+        <!-- Surprise (orange) 60-120 -->
+        <path d="M250,250 L440.5,140 A220,220 0 0,1 440.5,360 Z" fill="#F39C12"/>
+        <!-- Colère (red) 120-180 -->
+        <path d="M250,250 L440.5,360 A220,220 0 0,1 250,470 Z" fill="#FF6B6B"/>
+        <!-- Dégoût (green) 180-240 -->
+        <path d="M250,250 L250,470 A220,220 0 0,1 59.5,360 Z" fill="#4ECDC4"/>
+        <!-- Tristesse (blue) 240-300 -->
+        <path d="M250,250 L59.5,360 A220,220 0 0,1 59.5,140 Z" fill="#5B9BD5"/>
+        <!-- Peur (violet) 300-360 -->
+        <path d="M250,250 L59.5,140 A220,220 0 0,1 250,30 Z" fill="#A78BFA"/>
+
+        <!-- Dividing lines -->
+        <line x1="250" y1="250" x2="250" y2="30" stroke="#fff" stroke-width="3"/>
+        <line x1="250" y1="250" x2="440.5" y2="140" stroke="#fff" stroke-width="3"/>
+        <line x1="250" y1="250" x2="440.5" y2="360" stroke="#fff" stroke-width="3"/>
+        <line x1="250" y1="250" x2="250" y2="470" stroke="#fff" stroke-width="3"/>
+        <line x1="250" y1="250" x2="59.5" y2="360" stroke="#fff" stroke-width="3"/>
+        <line x1="250" y1="250" x2="59.5" y2="140" stroke="#fff" stroke-width="3"/>
+
+        <!-- Emoji faces and labels -->
+        <text x="310" y="105" text-anchor="middle" font-size="36">😊</text>
+        <text x="310" y="135" text-anchor="middle" fill="#2D3436" font-size="16" font-family="Nunito, sans-serif" font-weight="800">JOIE</text>
+        <text x="400" y="248" text-anchor="middle" font-size="36">😲</text>
+        <text x="400" y="278" text-anchor="middle" fill="#fff" font-size="15" font-family="Nunito, sans-serif" font-weight="800">SURPRISE</text>
+        <text x="310" y="395" text-anchor="middle" font-size="36">😠</text>
+        <text x="310" y="425" text-anchor="middle" fill="#fff" font-size="15" font-family="Nunito, sans-serif" font-weight="800">COLÈRE</text>
+        <text x="190" y="395" text-anchor="middle" font-size="36">🤢</text>
+        <text x="190" y="425" text-anchor="middle" fill="#fff" font-size="15" font-family="Nunito, sans-serif" font-weight="800">DÉGOÛT</text>
+        <text x="100" y="248" text-anchor="middle" font-size="36">😢</text>
+        <text x="100" y="278" text-anchor="middle" fill="#fff" font-size="14" font-family="Nunito, sans-serif" font-weight="800">TRISTESSE</text>
+        <text x="190" y="105" text-anchor="middle" font-size="36">😨</text>
+        <text x="190" y="135" text-anchor="middle" fill="#fff" font-size="16" font-family="Nunito, sans-serif" font-weight="800">PEUR</text>
+
+        <!-- Center circle -->
+        <circle cx="250" cy="250" r="40" fill="#fff" stroke="#2D3436" stroke-width="2"/>
+        <text x="250" y="245" text-anchor="middle" fill="#2D3436" font-size="10" font-family="Nunito, sans-serif" font-weight="800">COMMENT</text>
+        <text x="250" y="258" text-anchor="middle" fill="#2D3436" font-size="10" font-family="Nunito, sans-serif" font-weight="800">JE ME</text>
+        <text x="250" y="271" text-anchor="middle" fill="#2D3436" font-size="10" font-family="Nunito, sans-serif" font-weight="800">SENS ?</text>
+
+        <!-- Outer ring -->
+        <circle cx="250" cy="250" r="220" fill="none" stroke="#fff" stroke-width="4"/>
+      </svg>
+      <p style="color:#636e72; font-size:.88rem; margin-top:.8rem;">Imprimez cette roue ou utilisez-la comme modèle pour votre création !</p>
+    </div>
+
+    <!-- How to use -->
+    <div class="usage-box fade-in">
+      <h3 style="font-size:1.3rem; margin-bottom:1rem;">💡 Comment l'utiliser ?</h3>
+      <p>Accrochez la roue dans un endroit visible — sur le frigo, la porte de la chambre, ou près de la table du petit-déjeuner. Chaque matin (ou à n'importe quel moment de la journée), invitez votre enfant à tourner la roue sur l'émotion qu'il ressent.</p>
+      <p>L'idée n'est pas de « corriger » l'émotion, mais de la reconnaître. On peut dire : « Ah, tu te sens triste aujourd'hui. Tu veux me raconter pourquoi ? » ou simplement « D'accord, merci de me l'avoir montré. » C'est un outil de communication, pas de jugement.</p>
+      <p>Avec le temps, les enfants prennent l'habitude de nommer ce qu'ils ressentent, et c'est un cadeau qui les accompagnera toute leur vie.</p>
+    </div>
+
+    <div class="variant-box fade-in">
+      <h3 style="font-size:1.3rem; margin-bottom:1rem;">🔄 Variante pour les plus grands (6-10 ans)</h3>
+      <p>Pour les enfants plus âgés, ajoutez une couche de nuance : au dos de la roue, créez un deuxième cercle avec des émotions plus précises. Par exemple, sous « Joie », ajoutez « fier », « enthousiaste », « reconnaissant ». Sous « Tristesse », ajoutez « déçu », « nostalgique », « seul ». Cela enrichit leur vocabulaire émotionnel et les aide à être plus précis quand ils parlent de ce qu'ils ressentent.</p>
+      <p>Vous pouvez aussi ajouter un petit carnet à côté de la roue, où l'enfant dessine ou écrit un mot sur son émotion du jour. Au bout d'un mois, vous aurez un joli journal émotionnel à relire ensemble.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PARENTS -->
+<section class="parents-section" id="parents">
+  <div class="container">
+
+    <div class="parents-header fade-in">
+      <span class="section-badge">Série</span>
+      <h2>Il était une fois... les parents !</h2>
+      <p class="section-lead" style="margin-left:auto; margin-right:auto;">Ces petites contradictions parentales que les enfants repèrent toujours (et qu'on assume... plus ou moins).</p>
+    </div>
+
+    <div class="parents-grid">
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--coral);"></div>
+        <span class="parent-emoji">🤐</span>
+        <div><p>Il était une fois des parents qui interdisaient les <strong>gros mots</strong>... alors qu'eux en disaient tout le temps quand ils croyaient qu'on n'entendait pas.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--mint);"></div>
+        <span class="parent-emoji">🍕</span>
+        <div><p>Il était une fois des parents qui disaient « <strong>mange tes légumes</strong> »... et qui commandaient une pizza dès que les enfants étaient couchés.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--sunshine);"></div>
+        <span class="parent-emoji">🦷</span>
+        <div><p>Il était une fois des parents qui exigeaient <strong>3 minutes de brossage de dents</strong>... alors qu'eux se les brossaient en 3 secondes le matin.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--lavender);"></div>
+        <span class="parent-emoji">👔</span>
+        <div><p>Il était une fois des parents qui disaient « <strong>habille-toi correctement</strong> »... alors que papa passait le dimanche <strong>en slip</strong> devant la télé.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--coral);"></div>
+        <span class="parent-emoji">🌙</span>
+        <div><p>Il était une fois des parents qui ordonnaient de <strong>se coucher à 20h30</strong>... et qui restaient debout jusqu'à <strong>minuit passé</strong> à regarder des séries.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--mint);"></div>
+        <span class="parent-emoji">💨</span>
+        <div><p>Il était une fois des parents qui disaient « <strong>on ne pète pas en public</strong> »... alors que maman lâchait des <strong>prouts mémorables</strong> dans le canapé.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--sunshine);"></div>
+        <span class="parent-emoji">📱</span>
+        <div><p>Il était une fois des parents qui répétaient « <strong>pas d'écrans !</strong> »... tout en étant <strong>scotchés à leur téléphone</strong> du matin au soir.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--lavender);"></div>
+        <span class="parent-emoji">🤥</span>
+        <div><p>Il était une fois des parents qui disaient « <strong>il ne faut jamais mentir</strong> »... et qui inventaient des <strong>carabistouilles incroyables</strong> sur le Père Noël et la petite souris.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--coral);"></div>
+        <span class="parent-emoji">🍬</span>
+        <div><p>Il était une fois des parents qui interdisaient les <strong>bonbons avant le dîner</strong>... et qui avaient une <strong>cachette secrète de chocolat</strong> au-dessus du frigo.</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--mint);"></div>
+        <span class="parent-emoji">🙃</span>
+        <div><p>Il était une fois des parents qui faisaient <strong>tout à ta place</strong> parce que « c'est plus rapide »... et qui le lendemain disaient « <strong>débrouille-toi tout seul !</strong> »</p></div>
+      </div>
+
+      <div class="parent-card fade-in">
+        <div class="parent-card-border" style="background: var(--sunshine);"></div>
+        <span class="parent-emoji">📢</span>
+        <div><p>Il était une fois des parents qui <strong>criaient</strong> pour dire « <strong>arrête de crier !</strong> »... et qui ajoutaient « tu pourrais trouver <strong>un autre moyen d'exprimer ta colère</strong> ».</p></div>
+      </div>
+
+    </div>
+
+    <div class="parents-cta fade-in">
+      <p>🧐 Tu en vois d'autres ? Envoie-nous ta contradiction parentale préférée et elle apparaîtra peut-être ici le mois prochain !</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PODCAST -->
+<section class="podcast-section" id="podcast">
+  <div class="container">
+
+    <div style="text-align:center; margin-bottom:2.5rem;" class="fade-in">
+      <span class="section-badge">Le podcast</span>
+      <h2 class="section-title">Mukashi Mukashi, le podcast</h2>
+      <p class="section-lead" style="margin-left:auto; margin-right:auto;">Des histoires, des questions et des moments de calme — à écouter en famille.</p>
+    </div>
+
+    <div class="podcast-card fade-in">
+
+      <div class="podcast-player">
+        <div class="play-btn" role="button" aria-label="Lecture">
+          <svg width="24" height="24" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
+        <div class="podcast-meta" style="flex:1;">
+          <h3>Épisode 1 : Pourquoi on pleure quand on est triste ?</h3>
+          <p>Saison 1 — Les Émotions · 18 min</p>
+          <div class="podcast-progress"></div>
         </div>
       </div>
-      <div class="strategy-step fade-in">
-        <div class="step-dot">2</div>
-        <div class="step-content">
-          <h3>Phase 2 : Expansion</h3>
-          <p>Ajouter les activités mensuelles et la newsletter. Lancer les histoires participatives avec l'école. Déployer la cartographie des librairies lyonnaises.</p>
-        </div>
-      </div>
-      <div class="strategy-step fade-in">
-        <div class="step-dot">3</div>
-        <div class="step-content">
-          <h3>Phase 3 : Enrichissement</h3>
-          <p>Lancer le podcast : Q&amp;R, histoires inédites, méditations. Faire participer les enfants de la communauté. Développer les partenariats avec les librairies.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Plateformes -->
-  <section>
-    <div class="section-header fade-in">
-      <span class="icon">&#128225;</span>
-      <h2>Plateformes</h2>
-      <p>Un écosystème multi-canal où chaque plateforme a son rôle.</p>
-    </div>
-    <div class="platforms">
-      <div class="platform-card fade-in">
-        <div class="p-icon">&#128247;</div>
-        <h3>Instagram</h3>
-        <p>Carrousels, stories, reels. Le point d'entrée et le moteur de découverte.</p>
-      </div>
-      <div class="platform-card fade-in">
-        <div class="p-icon">&#128187;</div>
-        <h3>Blog</h3>
-        <p>Bibliographies complètes, activités détaillées, ebooks et cartographie à télécharger.</p>
-      </div>
-      <div class="platform-card fade-in">
-        <div class="p-icon">&#127911;</div>
-        <h3>Podcast</h3>
-        <p>Histoires, méditations et échanges avec les enfants. Le format immersif.</p>
-      </div>
-      <div class="platform-card fade-in">
-        <div class="p-icon">&#9993;&#65039;</div>
-        <h3>Newsletter</h3>
-        <p>Résumé mensuel, thème du mois, nouvelles trouvailles et liens exclusifs.</p>
-      </div>
-    </div>
-  </section>
+      <div class="podcast-body">
 
-  <!-- Ressources -->
-  <section>
-    <div class="section-header fade-in">
-      <span class="icon">&#127873;</span>
-      <h2>Ressources Gratuites</h2>
-      <p>Des outils concrets à télécharger pour les familles.</p>
+        <h4>🎵 Intro</h4>
+        <p>Un petit jingle doux — quelques notes de xylophone, le bruit d'une page qu'on tourne, et une voix chaleureuse : « Mukashi mukashi... il était une fois... un podcast pour les petites oreilles et les grands cœurs. »</p>
+
+        <h4>❓ La Question du mois</h4>
+        <p><em>« Pourquoi on pleure quand on est triste ? »</em></p>
+        <p>Tu sais, les larmes, c'est un peu le langage secret de ton corps. Quand tu es triste, ton cœur a besoin de parler, mais il ne connaît pas les mots. Alors il envoie des larmes pour dire : « Hé, là, quelque chose ne va pas, j'ai besoin qu'on s'occupe de moi. »</p>
+        <p>Et tu sais quoi ? Pleurer, ça fait du bien. Quand tu pleures, ton corps fabrique des petites substances magiques qui t'aident à te calmer. C'est comme si les larmes emportaient un peu de tristesse avec elles en coulant. C'est pour ça qu'après avoir pleuré, on se sent souvent un tout petit peu mieux, même si on est encore triste.</p>
+        <p>Même les adultes pleurent, hein ! Les papas, les mamans, les maîtresses, les grands-pères... Tout le monde. Parce que tout le monde a parfois le cœur gros. Et c'est normal. C'est même très bien.</p>
+
+        <h4>📖 L'Histoire inédite — <em>Gris-Gris, le petit nuage</em></h4>
+        <div class="podcast-story">
+          <p>Tout là-haut dans le ciel, il y avait un petit nuage nommé Gris-Gris. Gris-Gris était toujours triste, parce que dès qu'il ressentait quelque chose, il se mettait à pleuvoir.</p>
+          <p>« Encore ! » soupirait-il en voyant ses larmes tomber sur la terre. Les autres nuages, eux, étaient blancs et légers. Ils flottaient en riant. Gris-Gris se sentait différent, lourd, encombrant.</p>
+          <p>Un matin, après une longue pluie, il regarda vers le bas et vit quelque chose qu'il n'avait jamais remarqué : là où ses larmes étaient tombées, des fleurs avaient poussé. Des coquelicots rouges, des marguerites blanches, des bleuets... Un jardin entier, né de sa tristesse.</p>
+          <p>Une petite fille leva les yeux vers lui et cria : « Merci, nuage ! Grâce à toi, mon jardin est le plus beau du monde ! »</p>
+          <p>Ce jour-là, Gris-Gris comprit que ses larmes n'étaient pas un défaut. Elles étaient un cadeau. Et il pleura encore un petit peu — mais cette fois, c'étaient des larmes de joie.</p>
+        </div>
+
+        <h4>🧘 La Méditation — <em>Sentir les émotions dans son corps</em></h4>
+        <div class="meditation-script">
+          <p>Installe-toi confortablement. Tu peux t'asseoir ou t'allonger, comme tu préfères. Ferme les yeux si tu en as envie, ou regarde un point doux devant toi.</p>
+          <p><em>Respire</em> doucement. Inspire par le nez... et souffle par la bouche, comme si tu soufflais sur une bougie sans l'éteindre. Encore une fois. <em>Inspire...</em> et <em>souffle...</em></p>
+          <p>Maintenant, imagine que tu as une petite lampe magique à l'intérieur de toi. Cette lampe peut éclairer ce que tu ressens. Promène-la doucement dans ton corps.</p>
+          <p>Est-ce que tu sens quelque chose dans ton <em>ventre</em> ? Peut-être des papillons, ou un petit nœud ? C'est normal. Dis-lui bonjour.</p>
+          <p>Et dans ta <em>poitrine</em> ? Ton cœur bat comment ? Vite ? Doucement ? Est-ce qu'il est léger ou un peu lourd ? Pas besoin de changer quoi que ce soit. Juste remarquer.</p>
+          <p>Et tes <em>mains</em> ? Est-ce qu'elles sont détendues ou serrées ? Si elles sont serrées, tu peux les ouvrir tout doucement, comme une fleur qui s'ouvre le matin.</p>
+          <p>Maintenant, imagine que tu prends l'émotion que tu as trouvée, quelle qu'elle soit, et que tu la poses délicatement sur un petit nuage. Le nuage ne la juge pas. Il la porte, c'est tout. Et il s'éloigne doucement dans le ciel.</p>
+          <p><em>Respire</em> une dernière fois, bien profondément. Quand tu es prêt, ouvre les yeux et fais un petit sourire — même tout petit. Bravo, tu viens d'écouter ton corps.</p>
+        </div>
+
+      </div>
     </div>
+
+  </div>
+</section>
+
+<!-- HISTOIRES PARTICIPATIVES -->
+<section class="participative-section" id="histoires">
+  <div class="container">
+
+    <div style="text-align:center; margin-bottom:2.5rem;" class="fade-in">
+      <span class="section-badge">Participatif</span>
+      <h2 class="section-title">Histoires participatives</h2>
+      <p class="section-lead" style="margin-left:auto; margin-right:auto;">On commence l'histoire... et c'est à vous de l'inventer ! Chaque mois, un début d'histoire à compléter en famille. Les meilleures fins seront racontées dans le podcast.</p>
+    </div>
+
+    <div class="story-beginning fade-in">
+      <p><span class="first-words">Il était une fois</span> un renard qui avait peur de tout. Peur du vent dans les branches, peur des ombres sur le sol, peur du bruit que faisait la rivière la nuit. Les autres animaux de la forêt ne comprenaient pas. « Un renard, ça n'a peur de rien ! » disaient-ils. Mais lui, il tremblait du matin au soir.</p>
+      <p>Un jour, en se promenant le long d'un sentier qu'il n'avait jamais pris (parce qu'il avait trop peur, d'habitude), il aperçut quelque chose d'étrange entre les racines du plus vieux chêne de la forêt : une petite porte, pas plus haute qu'un terrier de lapin, peinte en bleu avec une poignée dorée. Et sur la porte, écrit en lettres minuscules, un seul mot : <strong>« Entre. »</strong></p>
+      <p>Le renard sentit son cœur battre très fort. Il posa sa patte sur la poignée...</p>
+    </div>
+
+    <div class="textarea-mockup fade-in" role="textbox" aria-label="Zone d'écriture pour la suite de l'histoire"></div>
+
+    <button class="story-submit-btn fade-in" type="button">Envoyer ma fin de l'histoire</button>
+
+    <p class="story-note fade-in">🎙️ Les meilleures fins seront racontées dans l'épisode 2 du podcast !</p>
+
+  </div>
+</section>
+
+<!-- RESSOURCES -->
+<section class="resources-section" id="ressources">
+  <div class="container">
+
+    <div style="text-align:center; margin-bottom:2.5rem;" class="fade-in">
+      <span class="section-badge">Gratuit</span>
+      <h2 class="section-title">Ressources gratuites</h2>
+      <p class="section-lead" style="margin-left:auto; margin-right:auto;">Des outils à télécharger, consulter et partager — parce que la lecture en famille, ça se prépare.</p>
+    </div>
+
     <div class="resources-grid">
-      <div class="resource-card fade-in">
-        <div class="r-icon">&#128118;</div>
-        <h3>Ma première bibliothèque</h3>
-        <p>Ebook gratuit — Sélection pour les 0-3 ans</p>
-      </div>
-      <div class="resource-card fade-in">
-        <div class="r-icon">&#128214;</div>
-        <h3>Bibliothèque de grand</h3>
-        <p>Ebook gratuit — Sélection pour les 4-7 ans</p>
-      </div>
-      <div class="resource-card fade-in">
-        <div class="r-icon">&#128205;</div>
-        <h3>Carte des librairies</h3>
-        <p>Cartographie des librairies indépendantes pour enfants à Lyon</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- Inspirations -->
-  <section>
-    <div class="section-header fade-in">
-      <span class="icon">&#128161;</span>
-      <h2>Inspirations</h2>
-      <p>Les références qui nourrissent le projet.</p>
-    </div>
-    <div class="themes-cloud fade-in">
-      <span class="theme-tag">Muller</span>
-      <span class="theme-tag">Hélène Tosco</span>
-      <span class="theme-tag">Le livre qui t'explique tout sur les parents</span>
-      <span class="theme-tag">Vulgaire (podcast)</span>
-      <span class="theme-tag">Nadège</span>
-      <span class="theme-tag">Morphée</span>
-      <span class="theme-tag">Little Bunbao</span>
-    </div>
-  </section>
+      <div class="resource-card fade-in">
+        <div class="resource-icon">📕</div>
+        <h4>Ebook — Nos coups de cœur 0-3 ans</h4>
+        <p>Une sélection commentée de 20 albums incontournables pour les tout-petits, classés par thème et par âge. Avec des conseils de lecture à voix haute.</p>
+        <a href="ebook-0-3.html" class="resource-btn" style="background: var(--coral);">Consulter le ebook</a>
+      </div>
 
-  <!-- Footer -->
-  <footer>
-    <h2>Mukashi Mukashi</h2>
-    <p>Il était une fois... et ce n'est que le début.</p>
-  </footer>
+      <div class="resource-card fade-in">
+        <div class="resource-icon">📗</div>
+        <h4>Ebook — Nos coups de cœur 4-7 ans</h4>
+        <p>25 livres testés et approuvés pour les enfants qui commencent à lire seuls. Des premières lectures aux albums complexes, il y en a pour tous les goûts.</p>
+        <a href="ebook-4-7.html" class="resource-btn" style="background: var(--mint);">Consulter le ebook</a>
+      </div>
 
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      <div class="resource-card fade-in">
+        <div class="resource-icon">🗺️</div>
+        <h4>Carte des librairies jeunesse — Lyon</h4>
+        <p>Notre sélection des meilleures librairies indépendantes de Lyon pour dénicher des albums jeunesse. Avec adresses, horaires et spécialités.</p>
+        <a href="librairies-lyon.html" class="resource-btn" style="background: var(--lavender);">Voir la carte</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section" id="newsletter">
+  <div class="container" style="max-width: 650px;">
+
+    <div class="fade-in">
+      <h2>Ne manquez aucun thème</h2>
+      <p style="margin-bottom: .5rem;">Chaque mois, recevez le nouveau thème directement dans votre boîte mail — avec des surprises en bonus.</p>
+
+      <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Merci ! 🎉';">
+        <input type="email" placeholder="votre@email.com" required aria-label="Adresse email">
+        <button type="submit">S'abonner</button>
+      </form>
+
+      <ul class="newsletter-perks">
+        <li>Aperçu du thème en avant-première</li>
+        <li>Recommandations exclusives</li>
+        <li>Activités imprimables</li>
+        <li>Invitations aux événements</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- LIBRAIRIES LYON -->
+<section class="librairies-section" id="librairies">
+  <div class="container">
+
+    <div style="text-align:center; margin-bottom:2.5rem;" class="fade-in">
+      <span class="section-badge" style="background: #e8f5e9; color: var(--mint);">Lyon</span>
+      <h2 class="section-title">Nos librairies jeunesse préférées à Lyon</h2>
+      <p class="section-lead" style="margin-left:auto; margin-right:auto;">Parce que rien ne remplace le plaisir de feuilleter un livre avec son enfant, entouré de libraires passionnés.</p>
+    </div>
+
+    <div class="librairies-grid">
+
+      <div class="lib-card fade-in">
+        <span class="lib-pin">📍</span>
+        <div>
+          <h4>À Titre d'Aile</h4>
+          <p class="lib-address">23 rue des Tables Claudiennes, 69001 Lyon</p>
+          <p class="lib-desc">Librairie jeunesse de référence sur les pentes de la Croix-Rousse. Un choix exigeant, des libraires qui connaissent chaque album par cœur, et une atmosphère qui donne envie de rester des heures.</p>
+        </div>
+      </div>
+
+      <div class="lib-card fade-in">
+        <span class="lib-pin">📍</span>
+        <div>
+          <h4>Raconte-moi la Terre</h4>
+          <p class="lib-address">14 rue du Plat, 69002 Lyon</p>
+          <p class="lib-desc">Voyages et découvertes pour petits et grands. Un fonds jeunesse magnifique, entre atlas illustrés, contes du monde et documentaires qui font rêver.</p>
+        </div>
+      </div>
+
+      <div class="lib-card fade-in">
+        <span class="lib-pin">📍</span>
+        <div>
+          <h4>Librairie Passages</h4>
+          <p class="lib-address">11 rue de Brest, 69002 Lyon</p>
+          <p class="lib-desc">Grande librairie généraliste avec un bel espace jeunesse au sous-sol. Des sélections thématiques soignées et un personnel aux petits soins.</p>
+        </div>
+      </div>
+
+      <div class="lib-card fade-in">
+        <span class="lib-pin">📍</span>
+        <div>
+          <h4>La BD à Lyon</h4>
+          <p class="lib-address">29 rue Saint-Jean, 69005 Lyon</p>
+          <p class="lib-desc">BD et albums illustrés dans le Vieux Lyon. Un paradis pour les amateurs de bandes dessinées jeunesse, avec des éditions rares et des dédicaces régulières.</p>
+        </div>
+      </div>
+
+      <div class="lib-card fade-in">
+        <span class="lib-pin">📍</span>
+        <div>
+          <h4>Vivement Dimanche</h4>
+          <p class="lib-address">1 cours de la Liberté, 69003 Lyon</p>
+          <p class="lib-desc">Librairie cosy avec une sélection jeunesse pointue et audacieuse. On y trouve des pépites qu'on ne voit nulle part ailleurs, et les conseils sont toujours justes.</p>
+        </div>
+      </div>
+
+      <div class="lib-card fade-in">
+        <span class="lib-pin">📍</span>
+        <div>
+          <h4>Decitre Bellecour</h4>
+          <p class="lib-address">29 place Bellecour, 69002 Lyon</p>
+          <p class="lib-desc">Grande librairie avec un rayon jeunesse complet sur deux niveaux. Idéal pour trouver aussi bien les classiques que les nouveautés, avec un espace lecture confortable.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-logo"><span>Mukashi</span> Mukashi</div>
+    <p class="footer-tagline">Il était une fois... et ce n'est que le début.</p>
+    <div class="footer-socials">
+      <a href="#" class="footer-social" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+      </a>
+      <a href="#" class="footer-social" aria-label="Podcast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      </a>
+      <a href="#" class="footer-social" aria-label="Blog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </a>
+    </div>
+    <p class="footer-note">Un projet né de l'amour des histoires et de l'envie de les partager en famille.</p>
+  </div>
+</footer>
+
+<!-- JS -->
+<script>
+(function() {
+  'use strict';
+
+  // Mobile nav toggle
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function() {
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      links.classList.remove('open');
+    });
+  });
+
+  // Sticky nav shadow
+  var nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 20) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // Fade-in on scroll
+  var fadeEls = document.querySelectorAll('.fade-in');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  </script>
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+    fadeEls.forEach(function(el) {
+      observer.observe(el);
+    });
+  } else {
+    fadeEls.forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }
+})();
+</script>
 
 </body>
 </html>

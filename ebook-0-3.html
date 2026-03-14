@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Première Bibliothèque — Sélection 0-3 ans | Mukashi Mukashi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #FF6B6B;
+            --mint: #4ECDC4;
+            --sunshine: #FFE66D;
+            --lavender: #A78BFA;
+            --blush: #FFF0F0;
+            --deep: #2D3436;
+            --cream: #FFFDF7;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--cream);
+            color: var(--deep);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Back link bar ── */
+        .back-bar {
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,.06);
+            padding: 14px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-bar a {
+            font-size: .95rem;
+            font-weight: 700;
+            color: var(--coral);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .back-bar a:hover { color: #e04545; }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, var(--blush) 0%, #fce4ec 40%, #e8f5e9 100%);
+            text-align: center;
+            padding: 64px 24px 56px;
+        }
+        .hero-icon {
+            font-size: 3.5rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--deep);
+            margin-bottom: 8px;
+        }
+        .hero .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.1rem, 2.8vw, 1.4rem);
+            color: var(--coral);
+            margin-bottom: 24px;
+        }
+        .hero .intro {
+            max-width: 680px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.85;
+        }
+
+        /* ── Container ── */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ── Category sections ── */
+        .category {
+            margin: 56px 0;
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+            padding-bottom: 14px;
+            border-bottom: 3px solid var(--sunshine);
+        }
+        .category-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        .cat-1 .category-number { background: var(--coral); }
+        .cat-2 .category-number { background: var(--lavender); }
+        .cat-3 .category-number { background: var(--mint); }
+        .cat-4 .category-number { background: #FF9F43; }
+        .cat-5 .category-number { background: #6C5CE7; }
+
+        .category-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.35rem, 3.5vw, 1.7rem);
+            font-weight: 700;
+            color: var(--deep);
+        }
+
+        /* ── Book cards ── */
+        .book-card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px 28px 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 16px rgba(0,0,0,.05);
+            transition: transform .2s, box-shadow .2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .book-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 24px rgba(0,0,0,.09);
+        }
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        .cat-1 .book-card::before { background: var(--coral); }
+        .cat-2 .book-card::before { background: var(--lavender); }
+        .cat-3 .book-card::before { background: var(--mint); }
+        .cat-4 .book-card::before { background: #FF9F43; }
+        .cat-5 .book-card::before { background: #6C5CE7; }
+
+        .book-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .book-emoji {
+            font-size: 2.4rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .book-meta {
+            flex: 1;
+        }
+        .book-title {
+            font-weight: 800;
+            font-size: 1.12rem;
+            color: var(--deep);
+        }
+        .book-author {
+            font-size: .92rem;
+            color: #888;
+            margin-top: 2px;
+        }
+        .book-review {
+            font-size: .98rem;
+            color: #555;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+        .age-tag {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: .82rem;
+            font-weight: 700;
+            color: white;
+        }
+        .age-0 { background: var(--mint); }
+        .age-1 { background: var(--coral); }
+        .age-2 { background: var(--lavender); }
+
+        /* ── Tips section ── */
+        .tips-section {
+            margin: 64px 0;
+            background: linear-gradient(135deg, #fef9e7 0%, var(--blush) 100%);
+            border-radius: 24px;
+            padding: 40px 32px;
+        }
+        .tips-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+            color: var(--deep);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+        .tip:last-child { margin-bottom: 0; }
+        .tip-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--coral);
+            color: white;
+            font-weight: 800;
+            font-size: .95rem;
+            flex-shrink: 0;
+        }
+        .tip-text {
+            font-size: 1.02rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        .tip-text strong {
+            color: var(--deep);
+        }
+
+        /* ── Footer ── */
+        .site-footer {
+            text-align: center;
+            padding: 48px 24px;
+            border-top: 1px solid rgba(0,0,0,.06);
+            margin-top: 32px;
+        }
+        .site-footer .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--deep);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .site-footer a {
+            color: var(--coral);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+        }
+        .site-footer a:hover { text-decoration: underline; }
+        .site-footer .love {
+            margin-top: 12px;
+            font-size: .85rem;
+            color: #aaa;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+            .hero { padding: 48px 18px 40px; }
+            .book-card { padding: 22px 18px 18px; }
+            .tips-section { padding: 28px 20px; }
+            .category-header { gap: 10px; }
+            .book-top { gap: 12px; }
+            .book-emoji { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Back bar -->
+<div class="back-bar">
+    <a href="index.html">&larr; Retour à Mukashi Mukashi</a>
+</div>
+
+<!-- Hero -->
+<header class="hero">
+    <span class="hero-icon">&#128218;</span>
+    <h1>Ma Première Bibliothèque</h1>
+    <p class="subtitle">Les indispensables pour les 0-3 ans</p>
+    <p class="intro">
+        Constituer la première bibliothèque de son enfant, c'est lui offrir un trésor pour la vie.
+        Pas besoin d'en avoir des centaines : quelques livres bien choisis, lus et relus avec amour,
+        suffisent à éveiller la curiosité, nourrir l'imagination et tisser un lien précieux entre vous.
+        Voici notre sélection, testée et approuvée par des petites mains enthousiastes.
+    </p>
+</header>
+
+<main class="container">
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CATEGORY 1 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="category cat-1">
+        <div class="category-header">
+            <div class="category-number">1</div>
+            <h2>Les premières découvertes</h2>
+        </div>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128213;</span>
+                <div class="book-meta">
+                    <div class="book-title">Mes petites mains</div>
+                    <div class="book-author">Jeanne Ashbé</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un livre tout-carton qui invite bébé à découvrir ses mains, ses pieds, son visage.
+                Les illustrations tendres et les textures à toucher en font un premier livre sensoriel parfait.
+                C'est le genre de livre que bébé attrape tout seul et feuillette avec une concentration étonnante.
+            </p>
+            <span class="age-tag age-0">Dès 6 mois</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128215;</span>
+                <div class="book-meta">
+                    <div class="book-title">Mon imagier</div>
+                    <div class="book-author">Xavier Deneux</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un imagier en noir et blanc puis en couleurs, avec des formes en creux et en relief.
+                Le design minimaliste et élégant respecte la perception visuelle des tout-petits.
+                Chaque page est une invitation à pointer, nommer, et partager ses premiers mots.
+            </p>
+            <span class="age-tag age-0">Dès 6 mois</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128216;</span>
+                <div class="book-meta">
+                    <div class="book-title">Oh ! les jolies petites bêtes</div>
+                    <div class="book-author">Édouard Manceau</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Des collages de papiers colorés qui se transforment en animaux rigolos à chaque page.
+                L'enfant découvre qu'avec des formes simples, on peut créer un monde entier.
+                Un livre qui donne envie de sortir les ciseaux et la colle pour créer ses propres bêtes.
+            </p>
+            <span class="age-tag age-1">Dès 1 an</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128211;</span>
+                <div class="book-meta">
+                    <div class="book-title">Petit Ours Brun (collection)</div>
+                    <div class="book-author">Danièle Bour</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Petit Ours Brun s'habille, mange, joue, fait des bêtises... exactement comme votre enfant.
+                Ces petits albums cartonnés sont des miroirs du quotidien où le tout-petit se reconnaît avec délice.
+                Un compagnon rassurant qui accompagne tous les rituels de la journée.
+            </p>
+            <span class="age-tag age-1">Dès 1 an</span>
+        </article>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CATEGORY 2 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="category cat-2">
+        <div class="category-header">
+            <div class="category-number">2</div>
+            <h2>Les émotions et le corps</h2>
+        </div>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128213;</span>
+                <div class="book-meta">
+                    <div class="book-title">La couleur des émotions</div>
+                    <div class="book-author">Anna Llenas</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Le monstre des couleurs a mélangé ses émotions et doit les trier une par une.
+                Ce pop-up spectaculaire donne un nom, une couleur et une forme à chaque sentiment.
+                Un outil précieux pour aider les petits (et les grands) à mettre des mots sur ce qu'ils ressentent.
+            </p>
+            <span class="age-tag age-2">Dès 2 ans</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128215;</span>
+                <div class="book-meta">
+                    <div class="book-title">Grosse colère</div>
+                    <div class="book-author">Mireille d'Allance</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Robert est en colère. Une chose énorme, rouge et terrible sort de lui et saccage sa chambre.
+                Cette métaphore géniale aide l'enfant à comprendre que la colère, ça se traverse et ça se calme.
+                Un classique absolu qu'on lit au moment des crises... et qui fonctionne à chaque fois.
+            </p>
+            <span class="age-tag age-2">Dès 2 ans</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128216;</span>
+                <div class="book-meta">
+                    <div class="book-title">Guili Guili</div>
+                    <div class="book-author">Édouard Manceau</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un livre-jeu où l'on chatouille les personnages du bout des doigts.
+                Le tout-petit rit, imite, pointe du doigt et découvre son propre corps par le jeu.
+                Simple, joyeux, irrésistible : le genre de livre qui transforme chaque lecture en fou rire.
+            </p>
+            <span class="age-tag age-0">Dès 6 mois</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128211;</span>
+                <div class="book-meta">
+                    <div class="book-title">Je t'aime</div>
+                    <div class="book-author">Adolfo Serra</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un album sans mots où les images racontent l'amour dans toute sa simplicité.
+                L'absence de texte laisse place à votre propre histoire, vos propres mots, votre propre tendresse.
+                Un livre qu'on lit différemment à chaque fois, et qui émeut autant l'adulte que l'enfant.
+            </p>
+            <span class="age-tag age-1">Dès 1 an</span>
+        </article>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CATEGORY 3 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="category cat-3">
+        <div class="category-header">
+            <div class="category-number">3</div>
+            <h2>Les histoires du soir</h2>
+        </div>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128213;</span>
+                <div class="book-meta">
+                    <div class="book-title">Bonne nuit tout le monde</div>
+                    <div class="book-author">Chris Haughton</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Les animaux de la forêt bâillent un par un, se blottissent et s'endorment sous les étoiles.
+                Les illustrations chaudes, les répétitions douces et le rythme lent préparent parfaitement au sommeil.
+                Un livre qui fait bailler les enfants (et souvent les parents) avant la dernière page.
+            </p>
+            <span class="age-tag age-1">Dès 1 an</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128215;</span>
+                <div class="book-meta">
+                    <div class="book-title">La moufle</div>
+                    <div class="book-author">Conte traditionnel</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Une moufle perdue dans la neige devient le refuge d'animaux de plus en plus gros.
+                Ce conte traditionnel russe, avec sa structure répétitive, captive les tout-petits qui anticipent la suite.
+                Le suspense monte, la moufle gonfle... et le dénouement provoque des éclats de rire à chaque lecture.
+            </p>
+            <span class="age-tag age-2">Dès 2 ans</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128216;</span>
+                <div class="book-meta">
+                    <div class="book-title">Bébé Balthazar (collection)</div>
+                    <div class="book-author">Marie-Hélène Place</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Des petits albums d'inspiration Montessori qui accompagnent bébé dans sa routine du soir.
+                Les textes sont doux, les illustrations réalistes et apaisantes, le format parfait pour les petites mains.
+                Une collection qui respecte le rythme de l'enfant et l'invite à la confiance en soi.
+            </p>
+            <span class="age-tag age-0">Dès 6 mois</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128211;</span>
+                <div class="book-meta">
+                    <div class="book-title">Tu me lis une histoire ?</div>
+                    <div class="book-author">Alain Chiche</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un album malicieux où un petit personnage demande sans cesse qu'on lui relise une histoire.
+                C'est exactement ce que fait votre enfant, et cette mise en abyme le fait sourire de complicité.
+                Le livre idéal pour célébrer ce rituel sacré qu'est le moment de la lecture partagée.
+            </p>
+            <span class="age-tag age-2">Dès 2 ans</span>
+        </article>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CATEGORY 4 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="category cat-4">
+        <div class="category-header">
+            <div class="category-number">4</div>
+            <h2>L'humour et l'absurde</h2>
+        </div>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128213;</span>
+                <div class="book-meta">
+                    <div class="book-title">Ours, ours, ours</div>
+                    <div class="book-author">Laëtitia Devernay</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un livre-accordeon sans texte où des ours se multiplient dans un ballet visuel hypnotique.
+                On le déplie, on le replie, on le regarde à l'endroit, à l'envers, et c'est toujours différent.
+                Un objet-livre étonnant qui prouve qu'un album peut être aussi un jouet et une œuvre d'art.
+            </p>
+            <span class="age-tag age-1">Dès 1 an</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128215;</span>
+                <div class="book-meta">
+                    <div class="book-title">C'est moi le plus fort</div>
+                    <div class="book-author">Mario Ramos</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un loup arrogant se promène en forêt et demande à chacun qui est le plus fort. La réponse est toujours la même... jusqu'a la dernière page.
+                L'humour décalé et la chute inattendue font de cet album un classique du rire à voix haute.
+                Les enfants adorent crier avec le loup et jubiler quand il se fait remettre à sa place.
+            </p>
+            <span class="age-tag age-2">Dès 2 ans</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128216;</span>
+                <div class="book-meta">
+                    <div class="book-title">Prout !</div>
+                    <div class="book-author">Francesco Pittau</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Oui, c'est un livre sur les prouts. Et oui, c'est absolument génial pour les tout-petits.
+                L'humour scatologique, c'est une étape saine et joyeuse du développement, et ce livre l'assume avec talent.
+                Fous rires garantis, à chaque page, à chaque lecture, sans exception.
+            </p>
+            <span class="age-tag age-2">Dès 2 ans</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128211;</span>
+                <div class="book-meta">
+                    <div class="book-title">Cache-cache</div>
+                    <div class="book-author">Stéphanie Blake</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un jeu de cache-cache simple et malin où l'on soulève des volets pour trouver les personnages.
+                La structure répétitive rassure, la surprise sous chaque volet excite, et le jeu recommence sans fin.
+                Un premier livre interactif qui transforme la lecture en jeu et le jeu en lecture.
+            </p>
+            <span class="age-tag age-1">Dès 1 an</span>
+        </article>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CATEGORY 5 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="category cat-5">
+        <div class="category-header">
+            <div class="category-number">5</div>
+            <h2>La nature et les animaux</h2>
+        </div>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128213;</span>
+                <div class="book-meta">
+                    <div class="book-title">Regarde dans la nuit</div>
+                    <div class="book-author">Emiri Hayashi</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un album scintillant où des éléments brillants apparaissent dans la nuit : étoiles, lucioles, yeux de chouette.
+                Les illustrations douces et les matières à toucher en font une promenade sensorielle nocturne merveilleuse.
+                Bébé est fasciné par les reflets, et les parents sont conquis par la poésie de chaque page.
+            </p>
+            <span class="age-tag age-0">Dès 6 mois</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128215;</span>
+                <div class="book-meta">
+                    <div class="book-title">Dans la forêt du paresseux</div>
+                    <div class="book-author">Anouck Boisrobert &amp; Louis Rigaud</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Un pop-up somptueux où la forêt tropicale se dresse en trois dimensions sous nos yeux.
+                Page après page, les arbres tombent, les animaux fuient... et le paresseux reste, suspendu.
+                Un premier livre écologique qui sensibilise avec beauté, sans discours moralisateur.
+            </p>
+            <span class="age-tag age-2">Dès 2 ans</span>
+        </article>
+
+        <article class="book-card">
+            <div class="book-top">
+                <span class="book-emoji">&#128216;</span>
+                <div class="book-meta">
+                    <div class="book-title">1, 2, 3 petits chats</div>
+                    <div class="book-author">Michel Van Zeveren</div>
+                </div>
+            </div>
+            <p class="book-review">
+                Trois petits chats qui font des bêtises, ça suffit pour apprendre à compter avec le sourire.
+                Le texte court et rythmique est idéal pour les premières lectures partagées.
+                Un album tendre et espiègle qui associe nombres, animaux et petites aventures du quotidien.
+            </p>
+            <span class="age-tag age-1">Dès 1 an</span>
+        </article>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TIPS SECTION -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="tips-section">
+        <h2>&#128161; Conseils de lecture pour les 0-3 ans</h2>
+
+        <div class="tip">
+            <div class="tip-number">1</div>
+            <p class="tip-text">
+                <strong>Laissez-les toucher, mâchouiller, manipuler les livres.</strong>
+                Un livre mordillé, c'est un livre aimé. Privilégiez les formats cartonnés solides
+                et acceptez que les premières lectures soient aussi des expériences sensorielles (et bavantes).
+            </p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-number">2</div>
+            <p class="tip-text">
+                <strong>Relisez le même livre 100 fois (oui, c'est normal).</strong>
+                La répétition n'est pas de l'ennui, c'est de l'apprentissage. Chaque relecture permet à l'enfant
+                de repérer de nouveaux détails, d'anticiper la suite et de se sentir compétent.
+            </p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-number">3</div>
+            <p class="tip-text">
+                <strong>Suivez leur regard et leur intérêt, pas le texte.</strong>
+                Si votre enfant veut rester cinq minutes sur la page du chat, restez cinq minutes sur la page du chat.
+                Le livre est un support, pas un programme. C'est l'enfant qui mène la danse.
+            </p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-number">4</div>
+            <p class="tip-text">
+                <strong>Lisez avec la voix, le corps, les bruits.</strong>
+                Faites les voix des personnages, bruissez comme le vent, rugissez comme le lion.
+                La lecture à voix haute, c'est du spectacle vivant, et votre enfant est le meilleur des publics.
+            </p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-number">5</div>
+            <p class="tip-text">
+                <strong>Créez un rituel : même heure, même endroit, même doudou.</strong>
+                Le rituel de lecture, c'est un cadre sécurisant qui dit à l'enfant : ici, maintenant,
+                on est ensemble, et rien d'autre ne compte. Trois livres avant le dodo, c'est sacré.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-brand">Mukashi Mukashi &mdash; Ma Première Bibliothèque</div>
+    <a href="index.html">Retour au site principal &rarr;</a>
+    <p class="love">Fait avec amour pour les petits lecteurs et leurs grands lecteurs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Librairies Jeunesse à Lyon — Mukashi Mukashi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --coral: #FF6B6B;
+      --mint: #4ECDC4;
+      --sunshine: #FFE66D;
+      --lavender: #A78BFA;
+      --blush: #FFF0F0;
+      --deep: #2D3436;
+      --cream: #FFFDF7;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--deep);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    a {
+      color: var(--coral);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #e05555;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- Header --- */
+    .site-header {
+      background: linear-gradient(135deg, var(--blush) 0%, #fce4ec 40%, #e8f5e9 100%);
+      padding: 40px 0 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: var(--sunshine);
+      opacity: 0.18;
+      border-radius: 50%;
+    }
+
+    .site-header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -30px;
+      width: 140px;
+      height: 140px;
+      background: var(--lavender);
+      opacity: 0.15;
+      border-radius: 50%;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--coral);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .back-link:hover {
+      transform: translateX(-3px);
+    }
+
+    .site-header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--deep);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-header .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      color: var(--lavender);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-header .intro {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #555;
+      position: relative;
+      z-index: 1;
+      text-align: left;
+    }
+
+    /* --- Map --- */
+    .map-section {
+      padding: 48px 0 16px;
+    }
+
+    .map-section h2 {
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: var(--deep);
+    }
+
+    .map-wrapper {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      border: 3px solid #f0ebe3;
+      max-width: 100%;
+    }
+
+    .map-wrapper iframe {
+      display: block;
+      width: 100%;
+      height: 360px;
+      border: none;
+    }
+
+    /* --- Bookshop cards --- */
+    .shops-section {
+      padding: 48px 0;
+    }
+
+    .shops-section > .container > h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .shops-section > .container > p {
+      text-align: center;
+      color: #777;
+      margin-bottom: 36px;
+      font-size: 1rem;
+    }
+
+    .shop-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      padding: 32px;
+      margin-bottom: 28px;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid #f5f0eb;
+    }
+
+    .shop-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .shop-card.coup-de-coeur {
+      border-left: 4px solid var(--coral);
+    }
+
+    .coup-de-coeur-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--coral), #ff8e8e);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .shop-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: var(--deep);
+    }
+
+    .arrondissement {
+      display: inline-block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .arr-1 { background: var(--coral); }
+    .arr-2 { background: var(--mint); }
+    .arr-3 { background: var(--lavender); }
+    .arr-7 { background: #f0946c; }
+    .arr-8 { background: #6cb4f0; }
+
+    .shop-address {
+      font-size: 0.92rem;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .shop-vibe {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--mint);
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .shop-review {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 12px;
+      line-height: 1.75;
+    }
+
+    .shop-hours {
+      font-size: 0.88rem;
+      color: #aaa;
+      border-top: 1px solid #f5f0eb;
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+
+    .shop-hours strong {
+      color: #999;
+    }
+
+    /* --- Tips --- */
+    .tips-section {
+      padding: 48px 0 56px;
+    }
+
+    .tips-box {
+      background: linear-gradient(135deg, var(--blush) 0%, #fef9f0 100%);
+      border-radius: 24px;
+      padding: 40px 36px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .tips-box h2 {
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 28px;
+      color: var(--deep);
+    }
+
+    .tips-list {
+      list-style: none;
+      counter-reset: tip;
+    }
+
+    .tips-list li {
+      counter-increment: tip;
+      padding: 16px 0 16px 56px;
+      position: relative;
+      font-size: 1.02rem;
+      color: #555;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .tips-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .tips-list li::before {
+      content: counter(tip);
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .tips-list li:nth-child(1)::before { background: var(--coral); }
+    .tips-list li:nth-child(2)::before { background: var(--mint); }
+    .tips-list li:nth-child(3)::before { background: var(--sunshine); color: var(--deep); }
+    .tips-list li:nth-child(4)::before { background: var(--lavender); }
+
+    .tips-list li strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--deep);
+      margin-bottom: 2px;
+    }
+
+    /* --- Footer --- */
+    .site-footer {
+      text-align: center;
+      padding: 36px 0;
+      background: var(--deep);
+      color: rgba(255,255,255,0.6);
+      font-size: 0.92rem;
+    }
+
+    .site-footer a {
+      color: var(--sunshine);
+    }
+
+    .site-footer a:hover {
+      color: #fff;
+    }
+
+    .site-footer .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 6px;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 600px) {
+      .site-header {
+        padding: 28px 0 40px;
+      }
+
+      .shop-card {
+        padding: 24px 20px;
+      }
+
+      .coup-de-coeur-tag {
+        position: static;
+        margin-bottom: 10px;
+      }
+
+      .tips-box {
+        padding: 28px 20px;
+      }
+
+      .map-wrapper iframe {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="back-link">&larr; Retour &agrave; Mukashi Mukashi</a>
+      <h1>Librairies Jeunesse &agrave; Lyon</h1>
+      <p class="subtitle">Notre cartographie des tr&eacute;sors cach&eacute;s</p>
+      <p class="intro">
+        Il y a quelque chose de magique dans une librairie ind&eacute;pendante.
+        L'odeur du papier neuf, les piles savamment d&eacute;sordonn&eacute;es, un album qu'on n'aurait jamais
+        d&eacute;couvert en ligne et qu'un libraire passionn&eacute; glisse entre nos mains avec un sourire complice.
+        Aller en librairie avec ses enfants, c'est leur offrir un rituel pr&eacute;cieux&nbsp;: celui de choisir, de toucher,
+        de s'asseoir par terre pour feuilleter, de repartir avec un tr&eacute;sor sous le bras.
+        Lyon regorge de librairies merveilleuses, chacune avec sa personnalit&eacute;, ses coups de c&oelig;ur
+        et ses libraires qui connaissent chaque recoin de leurs rayons. Voici nos pr&eacute;f&eacute;r&eacute;es.
+      </p>
+    </div>
+  </header>
+
+  <!-- Map -->
+  <section class="map-section">
+    <div class="container">
+      <h2>Elles sont toutes l&agrave;&nbsp;!</h2>
+      <div class="map-wrapper">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=4.78%2C45.73%2C4.88%2C45.79&layer=mapnik"
+          loading="lazy"
+          title="Carte de Lyon avec les librairies jeunesse">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bookshop cards -->
+  <section class="shops-section">
+    <div class="container">
+      <h2>Nos librairies pr&eacute;f&eacute;r&eacute;es</h2>
+      <p>Huit adresses test&eacute;es, approuv&eacute;es et ador&eacute;es par toute la famille.</p>
+
+      <!-- 1. À Titre d'Aile -->
+      <article class="shop-card coup-de-coeur">
+        <span class="coup-de-coeur-tag">Coup de c&oelig;ur</span>
+        <h3>&Agrave; Titre d'Aile</h3>
+        <span class="arrondissement arr-1">1er</span>
+        <p class="shop-address">23 rue des Tables Claudiennes, 69001 Lyon</p>
+        <p class="shop-vibe">La r&eacute;f&eacute;rence absolue de la litt&eacute;rature jeunesse lyonnaise.</p>
+        <p class="shop-review">
+          Nich&eacute;e sur les pentes de la Croix-Rousse, cette librairie est un v&eacute;ritable cocon pour les enfants et leurs parents.
+          La s&eacute;lection est d'une exigence rare&nbsp;: chaque album, chaque roman a &eacute;t&eacute; lu et choisi avec soin par une
+          libraire passionn&eacute;e qui conna&icirc;t ses livres par c&oelig;ur. Les lectures et ateliers r&eacute;guliers en font un lieu
+          vivant o&ugrave; l'on revient encore et encore. Id&eacute;al pour tous les &acirc;ges, de 0 &agrave; 12&nbsp;ans.
+        </p>
+        <p class="shop-hours"><strong>Horaires&nbsp;:</strong> Mardi au samedi, g&eacute;n&eacute;ralement 10h-19h. Consultez leur page pour les horaires exacts.</p>
+      </article>
+
+      <!-- 2. Raconte-moi la Terre -->
+      <article class="shop-card coup-de-coeur">
+        <span class="coup-de-coeur-tag">Coup de c&oelig;ur</span>
+        <h3>Raconte-moi la Terre</h3>
+        <span class="arrondissement arr-2">2e</span>
+        <p class="shop-address">14 rue du Plat, 69002 Lyon</p>
+        <p class="shop-vibe">Le voyage commence d&egrave;s la porte pouss&eacute;e.</p>
+        <p class="shop-review">
+          Une librairie unique en son genre, d&eacute;di&eacute;e au voyage et &agrave; la d&eacute;couverte du monde.
+          Le rayon jeunesse est une p&eacute;pite&nbsp;: atlas magnifiques, documentaires sur la nature, contes du monde entier,
+          livres sur les cultures et les langues. On y va pour &eacute;veiller la curiosit&eacute; des enfants,
+          pr&eacute;parer un voyage en famille ou simplement r&ecirc;ver. Parfait pour les petits explorateurs de 4 &agrave; 10&nbsp;ans.
+        </p>
+        <p class="shop-hours"><strong>Horaires&nbsp;:</strong> Lundi au samedi, environ 10h-19h.</p>
+      </article>
+
+      <!-- 3. Librairie Passages -->
+      <article class="shop-card">
+        <h3>Librairie Passages</h3>
+        <span class="arrondissement arr-2">2e</span>
+        <p class="shop-address">11 rue de Brest, 69002 Lyon</p>
+        <p class="shop-vibe">La grande ind&eacute;pendante lyonnaise, chaleureuse et g&eacute;n&eacute;reuse.</p>
+        <p class="shop-review">
+          L'une des plus belles librairies ind&eacute;pendantes de Lyon, avec un espace jeunesse
+          accueillant et richement garni. On y trouve aussi bien les derni&egrave;res nouveaut&eacute;s que des classiques
+          ind&eacute;modables. L'&eacute;quipe est toujours disponible pour un conseil, et l'ambiance donne envie de
+          s'attarder. Un incontournable si vous &ecirc;tes dans la Presqu'&icirc;le.
+        </p>
+        <p class="shop-hours"><strong>Horaires&nbsp;:</strong> Lundi au samedi, 10h-19h30 environ.</p>
+      </article>
+
+      <!-- 4. Decitre Bellecour -->
+      <article class="shop-card">
+        <h3>Decitre Bellecour</h3>
+        <span class="arrondissement arr-2">2e</span>
+        <p class="shop-address">29 place Bellecour, 69002 Lyon</p>
+        <p class="shop-vibe">L'enseigne embl&eacute;matique lyonnaise, avec un &eacute;tage jeunesse impressionnant.</p>
+        <p class="shop-review">
+          Le vaisseau amiral de la librairie &agrave; Lyon. L'&eacute;tage enti&egrave;rement d&eacute;di&eacute; &agrave; la jeunesse
+          est immense et bien organis&eacute;&nbsp;: albums, romans ados, BD, mangas, documentaires.
+          C'est l'endroit id&eacute;al quand on cherche un titre pr&eacute;cis ou qu'on veut tout trouver au m&ecirc;me endroit.
+          Moins intime qu'une petite librairie, mais le choix est imbattable.
+        </p>
+        <p class="shop-hours"><strong>Horaires&nbsp;:</strong> Lundi au samedi, 10h-19h30. Souvent ouvert certains dimanches.</p>
+      </article>
+
+      <!-- 5. Vivement Dimanche -->
+      <article class="shop-card coup-de-coeur">
+        <span class="coup-de-coeur-tag">Coup de c&oelig;ur</span>
+        <h3>Vivement Dimanche</h3>
+        <span class="arrondissement arr-3">3e</span>
+        <p class="shop-address">1 cours de la Libert&eacute;, 69003 Lyon</p>
+        <p class="shop-vibe">Le charme d'une librairie de quartier o&ugrave; l'on se sent chez soi.</p>
+        <p class="shop-review">
+          Une librairie cosy, lumineuse, avec une s&eacute;lection jeunesse soign&eacute;e aux petits oignons.
+          On sent le travail de curation derri&egrave;re chaque &eacute;tag&egrave;re. Les heures du conte r&eacute;guli&egrave;res
+          en font un rendez-vous ador&eacute; des familles du quartier. Les libraires prennent le temps
+          de discuter, de conna&icirc;tre vos enfants et de leur trouver LE livre parfait.
+        </p>
+        <p class="shop-hours"><strong>Horaires&nbsp;:</strong> Mardi au samedi, environ 10h-19h.</p>
+      </article>
+
+      <!-- 6. La Librairie du Tramway -->
+      <article class="shop-card">
+        <h3>La Librairie du Tramway</h3>
+        <span class="arrondissement arr-8">8e</span>
+        <p class="shop-address">156 avenue des Fr&egrave;res Lumi&egrave;re, 69008 Lyon</p>
+        <p class="shop-vibe">La p&eacute;pite de quartier, ancr&eacute;e dans la vie locale.</p>
+        <p class="shop-review">
+          Situ&eacute;e pr&egrave;s du tramway dans le 8e arrondissement, cette librairie de quartier est un mod&egrave;le
+          d'engagement culturel. Lectures pour les tout-petits, rencontres avec des auteurs,
+          partenariats avec les &eacute;coles du coin&nbsp;: on sent une librairie qui vit et fait vivre son quartier.
+          Les recommandations sont toujours justes et enthousiastes.
+        </p>
+        <p class="shop-hours"><strong>Horaires&nbsp;:</strong> Mardi au samedi, g&eacute;n&eacute;ralement 9h30-19h.</p>
+      </article>
+
+      <!-- 7. Lettres à Croquer -->
+      <article class="shop-card">
+        <h3>Lettres &agrave; Croquer</h3>
+        <span class="arrondissement arr-7">7e</span>
+        <p class="shop-address">78 rue de Marseille, 69007 Lyon</p>
+        <p class="shop-vibe">Petite, charmante, et d&eacute;di&eacute;e aux beaux albums.</p>
+        <p class="shop-review">
+          Un &eacute;crin minuscule et adorable dans le 7e arrondissement, o&ugrave; chaque livre semble avoir &eacute;t&eacute;
+          pos&eacute; l&agrave; avec amour. On y trouve de magnifiques albums illustr&eacute;s, des &eacute;diteurs ind&eacute;pendants
+          qu'on ne croise pas ailleurs, et des objets papeterie craqu&eacute;s avec go&ucirc;t. C'est l'endroit r&ecirc;v&eacute;
+          pour d&eacute;nicher un cadeau original ou un album d'exception.
+        </p>
+        <p class="shop-hours"><strong>Horaires&nbsp;:</strong> Mardi au samedi, environ 10h-19h.</p>
+      </article>
+
+      <!-- 8. Lucioles -->
+      <article class="shop-card">
+        <h3>Lucioles</h3>
+        <span class="arrondissement arr-1">1er</span>
+        <p class="shop-address">12 rue Sainte-Catherine, 69001 Lyon</p>
+        <p class="shop-vibe">Litt&eacute;rature jeunesse engag&eacute;e, inclusive et lumineuse.</p>
+        <p class="shop-review">
+          Une toute petite librairie sur les pentes de la Presqu'&icirc;le, avec une ligne &eacute;ditoriale forte&nbsp;:
+          litt&eacute;rature f&eacute;ministe, inclusive, qui ouvre les horizons. On y trouve des albums qui parlent
+          de diff&eacute;rence, de famille, d'&eacute;galit&eacute;, avec intelligence et po&eacute;sie. Un souffle d'air frais
+          dans le paysage de la litt&eacute;rature jeunesse.
+        </p>
+        <p class="shop-hours"><strong>Horaires&nbsp;:</strong> Mardi au samedi, horaires variables. V&eacute;rifiez avant de vous d&eacute;placer.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Tips -->
+  <section class="tips-section">
+    <div class="container">
+      <div class="tips-box">
+        <h2>Comment bien choisir en librairie</h2>
+        <ol class="tips-list">
+          <li>
+            <strong>Parlez au libraire</strong>
+            Ils connaissent chaque livre du rayon. Dites-leur l'&acirc;ge de votre enfant, ce qu'il aime, ce qu'il a d&eacute;j&agrave; lu&nbsp;: vous repartirez avec une p&eacute;pite.
+          </li>
+          <li>
+            <strong>Laissez votre enfant toucher, feuilleter, s'installer</strong>
+            Une librairie, c'est fait pour &ccedil;a. Laissez-le s'asseoir par terre, prendre son temps, h&eacute;siter entre deux albums. C'est comme &ccedil;a que na&icirc;t l'amour des livres.
+          </li>
+          <li>
+            <strong>Ne jugez pas un album par sa couverture (ni par son prix)</strong>
+            Les plus beaux albums sont parfois les plus discrets. Et un beau livre, c'est un objet d'art&nbsp;: il a un co&ucirc;t juste, qui r&eacute;mun&egrave;re auteurs, illustrateurs et &eacute;diteurs.
+          </li>
+          <li>
+            <strong>Demandez les coups de c&oelig;ur de la librairie</strong>
+            Ils sont toujours excellents. Ces petites &eacute;tiquettes manuscrites, ces piles sur le comptoir&nbsp;: ce sont les libraires qui vous parlent. &Eacute;coutez-les, ils ont (presque) toujours raison.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-title">Mukashi Mukashi &mdash; Nos librairies pr&eacute;f&eacute;r&eacute;es</p>
+      <p><a href="index.html">Retour &agrave; l'accueil</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
